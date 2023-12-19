@@ -1,55 +1,161 @@
-# Project Title
+# DEVCOM
 
-## Overview
+## 🖥 Overview
 
-What is your app? Brief description in a couple of sentences.
+**_DEVCOM - Developer Community_**
 
-### Problem
+The application caters to developers, offering a platform where they can explore job postings, stay updated on developer events, engage in meaningful conversations with peers, and efficiently manage their schedules. 
 
-Why is your app needed? Background information around any pain points or other reasons.
+### 📍 Problem
 
-### User Profile
+When I attended the Demo Day and networking event at BrainStation, I encountered numerous individuals already established in the tech industry or aspiring to enter it. Curious about their discovery of the event, I inquired from several attendees, and their responses varied—some discovered it through EventBridge, while others stumbled upon it on Reddit, and so forth. This prompted me to contemplate the idea of creating a centralized app that consolidates comprehensive information on developer events and job opportunities, providing a one-stop platform for the tech community. 
 
-Who will use your app? How will they use it? Any special considerations that your app must take into account.
+### 📍 User Profile
 
-### Features
+The app is tailored for individuals actively employed as Software Engineers or Developers, as well as those with a keen interest in the tech industry. It serves as a dedicated platform to connect, share information about job opportunities, and stay informed about upcoming events within the tech community.
 
-List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
+### 📍 Features
 
-## Implementation
+<ul>
+  <li>Login/Signup - Admin | Developer</li>
+  <li>Job Board</li>
+  <li>Developer Event</li>
+  <li>Calendar - Manage Schedule</li>
+  <li>Chat</li>
+</ul>
 
-### Tech Stack
+***
 
-List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
+## 🖥 Implementation
 
-### APIs
+### 📍 Tech Stack
 
-List any external sources of data that will be used in your app.
+#### Frontend Side
 
-### Sitemap
+`ReactJS | NextJS`
+`TailwindCSS`
 
-List the pages of your app with brief descriptions. You can show this visually, or write it out.
+#### Backend Side
 
-### Mockups
+`mySQL`
+`NodeJS`
+`Express`
+`Knex.js`
 
-Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
 
-### Data
+### 📍 APIs
 
-Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. 
 
-### Endpoints
 
-List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
+### 📍 Sitemap
 
-### Auth
 
-Does your project include any login or user profile functionality? If so, describe how authentication/authorization will be implemented.
+![sitemap](https://i.ibb.co/4Z9fYGp/sitemap.jpg,"sitemap")
 
-## Roadmap
+[Sitemap](https://miro.com/app/board/uXjVNBSrpvw=/?share_link_id=805996928100)
+
+
+### 📍 Mockups
+
+![Wireframe](https://i.ibb.co/cXBNpn0/Clean-Shot-2023-12-18-at-17-21-45-2x.png)
+
+![JobBoard](https://i.ibb.co/TbmpHvC/jobboard.jpg)
+![JobDetail](https://i.ibb.co/c2Qgn3w/jobdetail.jpg)
+![Event](https://i.ibb.co/G3T0MR8/event.jpg)
+![EventDetail](https://i.ibb.co/PFz5KTp/eventdetail.jpg)
+![EventChat](https://i.ibb.co/N6vGF9b/eventdetail-chat.jpg)
+![Community](https://i.ibb.co/vdx9my4/community.jpg)
+![Calendar](https://i.ibb.co/tH5gjnF/calendar.jpg)
+
+[Figma-wireframe](https://www.figma.com/file/UqzcD6SbDO6IMNDnJ6MyOY/Devcom?type=design&node-id=77%3A432&mode=design&t=JlqTwTDfc6DToDi9-1)
+
+### 📍 Data
+
+![Data](https://i.ibb.co/Gv8pcGR/Clean-Shot-2023-12-18-at-18-42-03-2x.png)
+
+```
+Users : Database for users
+Posts : Database for Community Posts
+Events : Database for Event Information
+Job : Database for Job Information
+```
+
+### 📍 Endpoints
+
+##### Login
+```
+http://localhost:PORT/login - GET
+http://localhosst:PORT/signup - POST
+```
+
+##### Job
+```
+http://localhost:PORT/api/jobs - GET (All jobs)
+httP://localhost:PORT/api/job/:id - GET (Job by Id)
+http://localhost:PORT/api/jobs - POST
+http://localhost:PORT/api/jobs/:id - PUT 
+http://localhost:PORT/api/jobs/:id - DELETE
+```
+
+##### Events 
+```
+http://localhost:PORT/api/events - GET (All events)
+http://localhost:PORT/api/event/:id - GET (Event by Id)
+http://localhost:PORT/api/events - POST
+http://localhost:PORT/api/events/:id - PUT
+http://localhost:PORT/api/events/:id - DELETE
+
+```
+### 📍 Auth
+
+`Json Web Token`
+
+```
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  const user = users[username];
+  console.log(user);
+  
+  if (user && user.password === password) {
+    let token = jwt.sign({ username }, SECRET_KEY);
+    res.json({ token });
+  }else {
+    res.sendStatus(401);
+  }
+});
+```
+```
+app.post("/signup", (req, res) => {
+  const { username, name, password } = req.body;
+  users[username] = {
+    name,
+    password, 
+    // will update with bcrypt
+  };
+  res.json({ success: "true" });
+});
+```
+```
+function authorize(req, res, next) {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, SECRET_KEY);
+    req.decoded = decoded;
+    
+    next();
+  }catch (err) {
+    res.sendStatus(401);
+  }
+}
+```
+
+
+## 🖥 Roadmap
 
 Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
 
-## Nice-to-haves
+*** 
+
+## 🖥 Nice-to-haves
 
 Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
