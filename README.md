@@ -33,7 +33,6 @@ The app is tailored for individuals actively employed as Software Engineers or D
 #### Frontend Side
 
 `ReactJS | NextJS`
-`TypeScript`
 `TailwindCSS`
 
 #### Backend Side
@@ -159,8 +158,6 @@ function authorize(req, res, next) {
   - [ ] Event List Page 
   - [ ] Event Detail Page 
   - [ ] Chat Modal 
-  - [ ] Community Page 
-  - [ ] Community Post Page 
   - [ ] Calendar Page 
   - [ ] Login Page 
   - [ ] Signup Page 
@@ -169,9 +166,6 @@ function authorize(req, res, next) {
   - [ ] GET - Job Detail
   - [ ] GET - Event List
   - [ ] GET - Event Detail 
-  - [ ] GET - Community Page 
-  - [ ] POST - Community Page
-  - [ ] PUT - Community Page
 - [ ] Login Feature 
   - [ ] Signup
   - [ ] Login
@@ -189,4 +183,8 @@ function authorize(req, res, next) {
 
 - [ ] My Account Page to show Events or applied job post 
 - [ ] Event own database
-
+  - [ ] Community Page 
+  - [ ] Community Post Page 
+  - [ ] GET - Community Page 
+  - [ ] POST - Community Page
+  - [ ] PUT - Community Page

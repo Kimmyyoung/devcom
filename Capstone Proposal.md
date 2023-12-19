@@ -18,8 +18,8 @@ The app is tailored for individuals actively employed as Software Engineers or D
 
 <ul>
   <li>Login/Signup - Admin | Developer</li>
-  <li>Job Board</li>
-  <li>Developer Event</li>
+  <li>Job Board (OpenAPI)</li>
+  <li>Developer Event (OpenAPI)</li>
   <li>Calendar - Manage Schedule</li>
   <li>Chat</li>
 </ul>
@@ -41,6 +41,7 @@ The app is tailored for individuals actively employed as Software Engineers or D
 `NodeJS`
 `Express`
 `Knex.js`
+`websocket`
 
 
 ### 📍 APIs
@@ -76,8 +77,8 @@ The app is tailored for individuals actively employed as Software Engineers or D
 ```
 Users : Database for users
 Posts : Database for Community Posts
-Events : Database for Event Information
-Job : Database for Job Information
+Events : Database for Event Information (I am thinking use openAPI)
+Jobs : Database for Job Information (I am thinking use openAPI)
 ```
 
 ### 📍 Endpoints
@@ -88,23 +89,16 @@ http://localhost:PORT/login - GET
 http://localhosst:PORT/signup - POST
 ```
 
-##### Job
+##### Job - or OpenAPI
 ```
 http://localhost:PORT/api/jobs - GET (All jobs)
 httP://localhost:PORT/api/job/:id - GET (Job by Id)
-http://localhost:PORT/api/jobs - POST
-http://localhost:PORT/api/jobs/:id - PUT 
-http://localhost:PORT/api/jobs/:id - DELETE
 ```
 
-##### Events 
+##### Events - or OpenAPI
 ```
 http://localhost:PORT/api/events - GET (All events)
 http://localhost:PORT/api/event/:id - GET (Event by Id)
-http://localhost:PORT/api/events - POST
-http://localhost:PORT/api/events/:id - PUT
-http://localhost:PORT/api/events/:id - DELETE
-
 ```
 ### 📍 Auth
 
@@ -152,10 +146,45 @@ function authorize(req, res, next) {
 
 ## 🖥 Roadmap
 
-Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
+#### Frontend 
 
-*** 
+- [ ] Setup Project
+- [ ] Sidebar component 
+- [ ] Page layout 
+- [ ] Page Styling 
+  - [ ] Landing Page - Home 
+  - [ ] Job Board 
+  - [ ] Job Detail Page 
+  - [ ] Event List Page 
+  - [ ] Event Detail Page 
+  - [ ] Chat Modal 
+  - [ ] Calendar Page 
+  - [ ] Login Page 
+  - [ ] Signup Page 
+- [ ] Connect API 
+  - [ ] GET - Job Board
+  - [ ] GET - Job Detail
+  - [ ] GET - Event List
+  - [ ] GET - Event Detail 
+- [ ] Login Feature 
+  - [ ] Signup
+  - [ ] Login
+- [ ] Calendar Features 
+
+#### Backend 
+- [ ] Database
+- [ ] Setup Backend 
+- [ ] Knex - route, controller etc
+
+#### Deployment 
+- [ ] Heroku Deployment 
 
 ## 🖥 Nice-to-haves
 
-Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
+- [ ] My Account Page to show Events or applied job post 
+- [ ] Event own database
+  - [ ] Community Page 
+  - [ ] Community Post Page 
+  - [ ] GET - Community Page 
+  - [ ] POST - Community Page
+  - [ ] PUT - Community Page
