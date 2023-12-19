@@ -33,6 +33,7 @@ The app is tailored for individuals actively employed as Software Engineers or D
 #### Frontend Side
 
 `ReactJS | NextJS`
+`TypeScript`
 `TailwindCSS`
 
 #### Backend Side
