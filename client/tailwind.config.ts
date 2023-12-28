@@ -32,14 +32,14 @@ const config: Config = {
         widest: '.1em',
       },
       colors: {
-        'gray': '#F5F5F8',
-        'navy': '#192655',
-        'lightnavy': '#3876BF',
-        'lightgray': '#9CA3AF',
-        'orange': '#E1AA74',
-        'purple': '#6D28D9',
-        'green': '#10B981',
-        'red': '#EF4444'
+        gray: '#F5F5F8',
+        navy: '#192655',
+        lightnavy: '#3876BF',
+        lightgray: '#9CA3AF',
+        orange: '#E1AA74',
+        purple: '#6D28D9',
+        green: '#10B981',
+        red: '#EF4444'
       }
     },
   },

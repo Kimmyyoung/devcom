@@ -5,7 +5,7 @@ const sidebarStructure = [
     name: "dasbor",
     parent: true,
     icon: "dasbor",
-    link: "/home"
+    link: "/dashboard"
   },
   {
     id: "dev-event",
@@ -18,21 +18,21 @@ const sidebarStructure = [
         id: "vancouver",
         title: "Vancouver",
         name: "devEvent.vancouver",
-        link: "/devevent/vancouver",
+        link: "/dashboard/devevent/vancouver",
         icon: "dot"
       },
       {
         id: "burnaby",
         title: "Burnaby",
         name: "devEvent.burnaby",
-        link: "/devevent/burnaby",
+        link: "/dashboard/devevent/burnaby",
         icon: "dot"
       },
       {
         id: "coquitlam",
         title: "Coquitlam",
         name: "devEvent.coquitlam",
-        link: "/devevent/coquitlam",
+        link: "/dashboard/devevent/coquitlam",
         icon: "dot"
       },
     ]
@@ -42,7 +42,7 @@ const sidebarStructure = [
     title: "Community",
     name: "community",
     parent: true,
-    link: "/community",
+    link: "/dashboard/community",
     icon: "community"
   },
   {
@@ -50,7 +50,7 @@ const sidebarStructure = [
     title: "Calendar",
     name: "calendar",
     parent: true,
-    link: "/calendar",
+    link: "/dashboard/calendar",
     icon: "calendar"
   },
 ];

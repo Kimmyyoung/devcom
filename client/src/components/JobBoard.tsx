@@ -46,7 +46,7 @@ const JobBoard = ({ data }) => {
 
         <button
             type="button"
-            className="inline-flex items-center text-white bg-justify-center w-full h-12 px-6 mb-1 font-medium tracking-wide transition duration-200 rounded bg-navy p-6 hover:bg-lightnavy shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  focus:shadow-outline focus:outline-none cursor-pointer"
+            className="inline-flex items-center text-white bg-justify-center w-full h-12 px-6 mb-1 font-medium tracking-wide transition duration-200 rounded bg-blue-950 p-6 hover:bg-blue-800 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  focus:shadow-outline focus:outline-none cursor-pointer"
             data-te-ripple-init
             data-te-ripple-color="light" onClick={()=> window.location.href = job_apply_link}>
             Apply Now
