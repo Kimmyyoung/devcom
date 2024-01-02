@@ -1,41 +1,33 @@
 import React from 'react'
 import Link from 'next/link';
+import { FaRegUserCircle } from "react-icons/fa";
 
-// icons 
-import { MdAccountCircle } from "react-icons/md";
-import { IconContext } from 'react-icons';
 
-const BlogCard = () => {
-  const blog_id = '1234';
-  const profilePic =
-  "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
+interface BlogCardProps { 
+  props: {
+    id: string,
+    title: string,
+    description: string,
+    image: string
+  }
+};
+
+
+const BlogCard = ({ props } : BlogCardProps) => { 
+  const { id, title, description, image } = props;
 
   return (
     <div className="p-4 md:w-1/3 font-pretendardRegular" >
     <div className="h-full bg-slate-100 rounded-lg overflow-hidden">
-        
-        
-          <div className="w-full flex m-2 flex-row p-2 gap-3 items-center">
-            
-                <div className="w-10">
-                    <img src={profilePic} />
-                </div>
-            
-                <div className="items-center">
-                  <p className="text-blue-800 font-bold">Vipin Bansal</p>
-                  <p className="text-gray-800 text-xs">2 June 2022</p>
-                </div>
-          </div>
-        
       
-      <img className="lg:h-48 md:h-36 w-full object-cover object-center" src="https://firebasestorage.googleapis.com/v0/b/thecaffeinecode.appspot.com/o/blog.jpg?alt=media&token=271cb624-94d4-468d-a14d-455377ba75c2" alt="blog cover"/>
+        <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt="blog cover"/>
       
       <div className="p-4">
         <h2 className="tracking-widest text-xs title-font font-bold text-blue-800 mb-1 uppercase ">Web development</h2>
-        <h1 className="title-font text-lg font-medium text-gray-900 mb-3">This is a blog template</h1>
+          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{title}</h1>
           <div className="flex items-center flex-wrap ">
             
-          <Link href={`/dashboard/blogdetail/${blog_id}`} replace>
+          <Link href={`/dashboard/blogdetail/${id}`} replace>
             <p className="inline-flex text-blue-800 items-center hover:text-blue-500">Read Blog
               <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>

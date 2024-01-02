@@ -2,6 +2,7 @@
 "use client"
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 //component
 import JobBoard from '@/components/JobBoard';
@@ -21,7 +22,7 @@ const JobDetail: React.FC<JobDetailProps> = () => {
   const style = { marginTop: '3px' };
   const { id } = useParams();
   const decodedId = decodeURIComponent(id);
-  
+  const router = useRouter();
   const {data, loading, error} = useJobFetch('search', {
     query: 'software',
     num_pages: 1
@@ -39,11 +40,12 @@ const JobDetail: React.FC<JobDetailProps> = () => {
 
         {/* job detail section */}
         <div className="flex flex-col w-3/4 gap-4 px-4 mr-8">
-          <Link href="/dashboard">
-            <h3 className="flex flex-row gap-2 uppercase text-md font-bold text-navy cursor-pointer hover:text-lightnavy">
+          
+        <h3 
+          className="flex flex-row gap-2 uppercase text-md font-bold text-navy cursor-pointer hover:text-lightnavy"
+          onClick={() => router.back()}>
               <FaArrowLeft style={style} /> All Jobs
             </h3>
-            </Link>
 
           <h1 className="text-4xl font-bold">{job_title}</h1>
 

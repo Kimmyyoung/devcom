@@ -15,7 +15,6 @@ interface JobCardProps {
 }
 
 const JobCard = ({ data }: JobCardProps) => {
-  console.log(data);
   let { job_title, employer_name, employer_logo, job_country, job_id } = data;
 
   return (

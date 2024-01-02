@@ -6,13 +6,13 @@ import "simplebar-react/dist/simplebar.min.css";
 import { sidebarStructure } from "../../src/data/SidebarMenu";
 import { Montserrat } from "next/font/google";
 
-
 //icon
 import { MdDeveloperBoard } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { NextRouter, useRouter } from "next/router";
+import axios from "axios";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -25,9 +25,7 @@ interface SidebarProps {
   router: any;
 }
 
-const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
-  const username = "Miles Heizer";
-  const company = "Unilever";
+const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
   const profilePic =
     "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
   const link = "/";
@@ -40,10 +38,34 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
   }
   
   const listRef = useRef<Record<string, HTMLUListElement | null>>({});
-
   const [isExpand, setIsExpand] = useState(true);
   const [isExpandOnHover, setIsExpandOnHover] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [role, setRole] = useState("");
 
+  if (token === undefined || token === null || !token) {
+    token = sessionStorage.getItem("token") || "";
+  }
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get('http://localhost:8080/users/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        setUserName(res.data.username);
+        setRole(res.data.role);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchUser();
+
+  }, [token]);
 
   const handleHoverExpand = (value: boolean) => {
     if (!isExpand) {
@@ -293,10 +315,10 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
                   <div
                     className={`text-base font-semibold text-slate-700 truncate duration-300`}
                   >
-                    {username}
+                    {userName}
                   </div>
                   <div className={`text-sm text-slate-500 truncate`}>
-                    {company}
+                    {role}
                   </div>
                 </div>
               </a>

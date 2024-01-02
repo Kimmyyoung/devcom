@@ -15,16 +15,19 @@ try {
 
 const loginUsersController = async (req,res) => {
   try {
-    const { username, password } = req.body;
+    console.log(req.body);
+
+    const { email, password } = req.body;
     const user = await userModel.loginUsers(req, res);
+    
     if(user && user.password === password) {
-      let token = jwt.sign({ username }, SECRET_KEY);
+      let token = jwt.sign({ email }, SECRET_KEY);
       res.json({ token });
     }else{
-      res.status(401).send("Unauthorized");
+      res.status(401).send("Invalid credentials");
     }
-    
-  }catch(error){
+    return user;
+  }catch(err){
     res.status(400).send(`Error (LoginUserModel): ${err}`);
   }
 };
@@ -32,20 +35,31 @@ const loginUsersController = async (req,res) => {
 const createUsersController = async (req, res) => {
   try {
     const user = await userModel.createUsers(req, res);
-    res.status(201).json(user);
-  } catch (err) {
-    if (err.code === '23505') {
-      res.status(409).send(`Error (createUsersController): User with the same username or email already exists.`);
-    } else {
-      console.error(err); 
-      res.status(400).send(`Error (createUsersController): ${err.message}`);
+    
+    if(res.statusCode === 401) {
+      res.status(401).send('Existed User');
+      return;
     }
+
+    res.status(200).json(user);
+    
+  } catch (err) {
+    res.status(400).send(`Error (createUserController): ${err}`);
   }
 };
+
+const profileUser = async (req, res) => {
+  try{
+    await userModel.profileUser(req, res);
+  }catch(err){
+    res.status(401).send('Invalid token');
+  }
+}
 
 
 module.exports = {
   getUsersController,
   loginUsersController,
-  createUsersController
+  createUsersController,
+  profileUser
 };

@@ -5,7 +5,7 @@ const sidebarStructure = [
     name: "dasbor",
     parent: true,
     icon: "dasbor",
-    link: "/dashboard"
+    link: "/"
   },
   {
     id: "dev-event",

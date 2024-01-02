@@ -1,13 +1,35 @@
-import React from 'react'
-
-//component 
+'use client';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import BlogCard from '@/components/BlogCard';
-
-// icons
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { IoTimeOutline } from "react-icons/io5";
+import axios from 'axios';
+import Loading from '@/components/Loading';
+
+const postURL = "http://localhost:8080/posts";
 
 const page = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [userName, setUserName] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    try {
+      const fetchPost = async () => {
+        const res = await axios.get(postURL);
+        setPosts(res.data);
+        setLoading(true);
+      };
+      fetchPost();
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  if (!loading) return <Loading />;
+  
   return (
     <>
       <section className="flex flex-col px-2 pt-2 overflow-y-auto font-pretendardRegular w-full h-screen">
@@ -29,29 +51,20 @@ const page = () => {
 
 
           <div>
-              <button className="px-4 py-2 text-xs font-medium text-blue-950 transition-colors duration-200 bg-gray-100 rounded-full sm:text-sm hover:bg-blue-950 hover:text-white">
+            <button className="px-4 py-2 text-xs font-medium text-blue-950 transition-colors duration-200 bg-gray-100 rounded-full sm:text-sm hover:bg-blue-950 hover:text-white"
+              onClick={ ()=>{router.push('/dashboard/blogpost')}}
+            >
               Blog Post
             </button>
           </div>
         </div>
 
         <div className="flex flex-row mt-6">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          {posts && posts.map((post) => (
+            <BlogCard key={post.id} props={post} />
+          ))}
         </div>
 
-        <div className="flex flex-row mt-8">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-        </div>
-
-        <div className="flex flex-row mt-8">
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-          </div>
         </section>
     </>
   )

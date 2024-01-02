@@ -6,9 +6,10 @@ exports.up = function (knex) {
     table.string('password');
     table.string('role');
     table.timestamps(true, true);
-  });
+  })
 };
 
+
 exports.down = function (knex) {
-  return knex.schema.dropTable('users');
-};
+  return knex.schema.dropTable('users')
+}
