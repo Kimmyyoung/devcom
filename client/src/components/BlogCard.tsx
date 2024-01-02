@@ -1,25 +1,48 @@
-import React from 'react'
+"use client";
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link';
 import { FaRegUserCircle } from "react-icons/fa";
-
+import axios from 'axios';
 
 interface BlogCardProps { 
   props: {
     id: string,
     title: string,
     description: string,
-    image: string
+    image: string,
+    user_id: number
   }
 };
 
+const postURL = "http://localhost:8080/posts/";
+
 
 const BlogCard = ({ props } : BlogCardProps) => { 
-  const { id, title, description, image } = props;
+  const { id, title, description, image, user_id } = props;
+  const [author, setAuthor] = useState();
+  
+  useEffect(() => {
+    try {
+      const fetchAuthor = async () => {
+        const res = await axios.get(postURL + user_id + "/author");
+        setAuthor(res.data[0].username);
+      };
 
+      fetchAuthor();
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+  
   return (
     <div className="p-4 md:w-1/3 font-pretendardRegular" >
     <div className="h-full bg-slate-100 rounded-lg overflow-hidden">
       
+        <div className="flex items-center flex-wrap px-2 pl-4 py-4">
+          <h2 className="tracking-widest text-xs title-font font-bold text-blue-800 mb-1 uppercase">
+            {author}
+          </h2>
+        </div>
         <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt="blog cover"/>
       
       <div className="p-4">

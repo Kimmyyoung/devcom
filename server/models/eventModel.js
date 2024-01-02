@@ -12,6 +12,18 @@ const getEvents = async(req,res) => {
 };
 
 
+const getEventsById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const event = await knex('events').select('*').where({ id });
+    return event;
+  } catch (err) {
+    throw new Error(`Error in getEventsById: ${err.message}`);
+  }
+}
+
+
 module.exports = {
   getEvents,
+  getEventsById
 };

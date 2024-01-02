@@ -11,6 +11,16 @@ const getEventsContoller = async (req,res) => {
   }
 }
 
+const getEventsByIdController = async (req, res) => {
+  try {
+    const event = await eventModel.getEventsById(req);
+    res.status(200).json(event);
+  }catch(err){
+    console.error('Error in getEventsById:', err);
+  }
+}
+
 module.exports = {
   getEventsContoller,
+  getEventsByIdController
 }

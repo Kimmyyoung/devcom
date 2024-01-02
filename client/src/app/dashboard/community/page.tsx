@@ -11,6 +11,7 @@ const postURL = "http://localhost:8080/posts";
 
 const page = () => {
   const [posts, setPosts] = useState([]);
+  const [author, setAuthor] = useState(); 
   const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState("");
   const router = useRouter();
@@ -27,6 +28,7 @@ const page = () => {
       console.error(err);
     }
   }, []);
+
 
   if (!loading) return <Loading />;
   

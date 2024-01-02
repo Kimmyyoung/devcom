@@ -1,12 +1,34 @@
 
-import React from 'react';
-
-// components
+"use client"
+import React, {useState, useEffect} from 'react';
 import EventCard from "@/components/EventCard";
-
+import axios from 'axios';
 import { MdLocationOn } from "react-icons/md";
 
+const eventsURL = "http://localhost:8080/events";
+
 const Page: React.FC = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    try {
+      const fetchEvents = async () => {
+        const res = await axios.get(eventsURL);
+
+        res.data = res.data.filter((event) => event.eventLocationId === 1);
+
+        setEvents(res.data);
+        setLoading(true);
+      };
+      fetchEvents();
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+  
+
+  
   return (
     <>
     <div className="p-6 flex w-100 flex-col gap-2 overflow-y-auto overflow-x-hidden">
@@ -19,8 +41,8 @@ const Page: React.FC = () => {
       </div>   
       
         <div className="flex px-6 py-2 w-full align-middle sm:-mx-6 lg:-mx-8">
-          <div className="">
-              <div className="flex flex-row w-100 justify-between py-2 px-4 bg-slate-500 text-white">
+          <div className="fill-available">
+              <div className="flex flex-row w-full justify-between py-2 px-4 bg-slate-500 text-white">
                 <p>Event</p>
                 <p>Status</p>
                 <p>About</p>
@@ -29,10 +51,9 @@ const Page: React.FC = () => {
               </div>
             
               <div className="flex flex-col bg-white">
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
+              {events && events.map((event) => (
+                <EventCard props={event} />
+              ))}
               </div>                          
           </div>
         </div>
