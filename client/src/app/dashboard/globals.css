@@ -11,3 +11,15 @@
 .fill-available {
   width: -webkit-fill-available;
 }
+
+.join-button {
+  background-color: rgb(59 130 246);
+}
+
+.join-button:disabled {
+  background-color: gray;
+}
+
+.join-button:disabled:hover {
+  background-color: gray;
+}

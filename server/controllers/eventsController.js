@@ -20,7 +20,17 @@ const getEventsByIdController = async (req, res) => {
   }
 }
 
+const createAttendeeController = async (req, res) => {
+  try{
+    const attendee = await eventModel.createAttendee(req, res);
+    res.status(200).json(attendee);
+  }catch(err){
+    console.error(err)
+  }
+}
+
 module.exports = {
   getEventsContoller,
-  getEventsByIdController
+  getEventsByIdController,
+  createAttendeeController
 }

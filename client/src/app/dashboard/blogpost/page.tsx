@@ -4,34 +4,21 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import useUserFetch from '@/hook/useUserFetch';
 
 const postURL = "http://localhost:8080/posts/create";
-const profileURL = "http://localhost:8080/users/profile";
+ 
+
 
 const page = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [image, setImage] = useState("");
     const [userId, setUserId] = useState("");
-    const [token, setToken] = useState(sessionStorage.getItem("token") || "");
+    const token = sessionStorage.getItem("token") || "";
     const router = useRouter();
-
-    useEffect(() => {
-        try {
-            const fetchUser = async () => {
-                const res = await axios.get(profileURL, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                setUserId(res.data.id);
-            }
-
-            fetchUser();
-        } catch (err) {
-            console.error(err);
-        }
-    }, []);
+    const { user, loading, error } = useUserFetch(token);
+    
 
     const createPost = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -40,7 +27,7 @@ const page = () => {
             const postData = {
                 title: title,
                 content: content,
-                user_id: userId,
+                user_id: user?.id,
                 image: image? image : "https://i.ibb.co/BrXvpNb/developer.jpg"
             };
             
