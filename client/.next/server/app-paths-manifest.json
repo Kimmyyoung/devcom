@@ -1,5 +1,7 @@
 {
   "/page": "app/page.js",
-  "/dashboard/devevent/vancouver/page": "app/dashboard/devevent/vancouver/page.js",
-  "/dashboard/eventdetail/[id]/page": "app/dashboard/eventdetail/[id]/page.js"
+  "/dashboard/eventdetail/[id]/page": "app/dashboard/eventdetail/[id]/page.js",
+  "/dashboard/community/page": "app/dashboard/community/page.js",
+  "/dashboard/blogpost/page": "app/dashboard/blogpost/page.js",
+  "/dashboard/calendar/page": "app/dashboard/calendar/page.js"
 }

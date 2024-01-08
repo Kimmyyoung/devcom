@@ -36,8 +36,7 @@ const BlogCard = ({ props } : BlogCardProps) => {
   
   return (
     <div className="p-4 md:w-1/3 font-pretendardRegular" >
-    <div className="h-full bg-slate-100 rounded-lg overflow-hidden">
-      
+    <div className="h-full bg-white rounded-lg overflow-hidden">
         <div className="flex items-center flex-wrap px-2 pl-4 py-4">
           <h2 className="tracking-widest text-xs title-font font-bold text-blue-800 mb-1 uppercase">
             {author}

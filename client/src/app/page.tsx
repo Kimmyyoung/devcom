@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import RootLayout from './dashboard/layout';
 import Home from './dashboard/page';
 import validator from 'validator';
-import styles from './layout.css';
+import DarkMode from '@/components/DarkMode';
 
 const loginURL = 'http://localhost:8080/users/login';
 const signupURL = 'http://localhost:8080/users/signup';
@@ -76,49 +76,50 @@ const Page = () => {
 
 	const renderLogin = () => {
 		return (
-	<div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-		<div className="relative py-3 sm:max-w-xl sm:mx-auto">
+			<div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 dark:bg-slate-800">
+				<div className="relative py-3 sm:max-w-xl sm:mx-auto">
 			<div
 				className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
 			</div>
-			<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+					<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 dark:bg-slate-800">
+					<DarkMode />
 				<div className="max-w-md mx-auto">
 					<div className="flex flex-row gap-3">
 								<h1 className="text-2xl text-white rounded px-3 bg-gradient-to-r from-blue-300 to-blue-600 font-semibold">DEVCOM</h1>
-								<h1 className="text-2xl font-semibold uppercase">Login</h1>
+								<h1 className="text-2xl font-semibold uppercase dark:text-white">Login</h1>
 							</div>
 							
 
 							<form className="divide-y divide-gray-200" onSubmit={handleLogin}>
-						<div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+						<div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 dark:text-white">
 							<div className="relative">
-										<input id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" 
+										<input id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 dark:text-white dark:bg-slate-800" placeholder="Email address" 
   									onBlur={(e) => checkEmail(e.target.value)} 
 										/>
 
-										<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
+										<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:text-white">Email Address</label>
 							</div>
 							<div className="relative">
-								<input id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" 
+								<input id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 dark:bg-slate-800 dark:text-white" placeholder="Password" 
 								onBlur={(e) => checkPassword(e.target.value)}
 								/>
-								<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
+								<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:text-white">Password</label>
 									</div>
 									
 							<div className="relative flex flex-col gap-2">
 										<button className="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
-										<span className="text-gray-500">You don't have account?
+										<span className="text-gray-500 dark:text-slate-400">You don't have account?
 											<span onClick={()=>setShowLogin(!showLogin)}  className="cursor-pointer ml-2 text-blue-500">Signup</span>
 										</span>
 							</div>
 						</div>
 							</form>
 							
-							<div className="text-red-500 text-center">
+							<div className="text-red-500 text-center dark:text-white">
 								{validError && <p>{validError}</p>}
 							</div>
 
-							<div className="text-red-500 text-center">
+							<div className="text-red-500 text-center dark:text-white">
 								{isLoginError && <p>{errormessage}</p>}
 							</div>	
 
@@ -131,60 +132,59 @@ const Page = () => {
 
 	const renderSignup = () => {
 		return (
-			<div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+			<div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 dark:bg-slate-800">
 		<div className="relative py-3 sm:max-w-xl sm:mx-auto">
 			<div
 				className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
 			</div>
-			<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+					<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 dark:bg-slate-800">
+					<DarkMode />
 				<div className="max-w-md mx-auto">
 					<div className="flex flex-row gap-3">
 								<h1 className="text-2xl text-white rounded px-3 bg-gradient-to-r from-blue-300 to-blue-600 font-semibold">DEVCOM</h1>
-								<h1 className="text-2xl font-semibold uppercase">Signup</h1>
+								<h1 className="text-2xl font-semibold uppercase dark:text-white">Signup</h1>
 						</div>
 							<form className="divide-y divide-gray-200" onSubmit={handleSignup}>
-								<div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-									
-	
+								<div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 dark:text-white">
 									<div className="relative">
-									 <input id="username" name="username" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="User Name" />
-										<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">User Name</label>
+									 <input id="username" name="username" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 dark:text-white dark:bg-slate-800" placeholder="User Name" />
+										<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:text-white">User Name</label>
 									</div>
 	
 									<div className="relative">              
-								<input id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address"
+								<input id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 dark:text-white dark:bg-slate-800" placeholder="Email address"
 								onBlur={(e)=>checkEmail(e.target.value)}
 								/>
-								<label className="absolute left-0 -top-5.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
+								<label className="absolute left-0 -top-5.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:text-white">Email Address</label>
 							</div>
 							<div className="relative">
-								<input id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" 
+								<input id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 dark:text-white dark:bg-slate-800" placeholder="Password" 
 								onBlur={(e)=>checkPassword(e.target.value)}
 								/>
-								<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
+								<label className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:text-white">Password</label>
 									</div>
 
 									<div className="relative">
-										<select id="role" name="role" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600">
+										<select id="role" name="role" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 dark:text-white dark:bg-slate-800">
 											<option value="" disabled selected hidden>Select Role</option>
 											<option value="admin">Admin</option>
 											<option value="developer">Developer</option>
 										</select>
-										<label htmlFor="role" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Role</label>
+										<label htmlFor="role" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:text-slate-400">Role</label>
 									</div>
 
-									<div className="text-red-500 text-center">
+									<div className="text-red-500 text-center dark:text-slate-400">
 										{validError && <p>{validError}</p>}
 									</div>
 
-									<div className="text-red-500 text-center">
+									<div className="text-red-500 text-center dark:text-slate-400">
 										{isSignupError && <p>{errormessage}</p>}
 									</div>
 
 									
 							<div className="relative flex flex-col gap-2">
 								<button className="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
-										<span className="text-gray-500">Do you already have account? <span onClick={()=>setShowLogin(!showLogin)} className="cursor-pointer text-blue-500">Login</span></span>
+										<span className="text-gray-500 dark:text-slate-400">Do you already have account? <span onClick={()=>setShowLogin(!showLogin)} className="cursor-pointer text-blue-500">Login</span></span>
 							</div>
 						</div>
 					</form>

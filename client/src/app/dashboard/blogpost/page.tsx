@@ -54,9 +54,9 @@ const page = () => {
     
   return (
     <>
-    <div className="bg-white p-4 py-8">
-    <div className="heading text-center font-bold text-2xl m-5 text-gray-800 bg-white">New Post</div>
-    <form className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-100 p-4  max-w-2xl"
+    <div className="bg-white p-4 py-8 h-full dark:bg-slate-800">
+    <div className="heading text-center font-bold text-2xl m-5 text-gray-800 bg-white dark:bg-slate-800 dark:text-white">New Post</div>
+    <form className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-100 p-4 max-w-2xl dark:border-white"
     onSubmit={createPost}
               >
                   <ToastContainer
@@ -71,10 +71,10 @@ draggable
 pauseOnHover
 theme="colored"
 />
-                  <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" placeholder="Title" value={title} type="text" 
-                onChange={e => setTitle(e.target.value)}
-                />
-        <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" placeholder="Describe everything about this post here"
+        <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none dark:bg-slate-800 dark:text-white" placeholder="Title" value={title} type="text" 
+        onChange={e => setTitle(e.target.value)}
+        />
+        <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none dark:bg-slate-800 dark:text-white" placeholder="Describe everything about this post here"
         value={content}
         onChange={e => setContent(e.target.value)}
         ></textarea>
@@ -86,11 +86,11 @@ theme="colored"
                 </svg>
                 <input type="file" onChange={e => setImage(e.target.files)} />
             </label>
-            <div className="count ml-auto text-gray-400 text-xs font-semibold">0/300</div>
+            <div className="count ml-auto text-gray-400 text-xs font-semibold dark:text-slate-400">0/300</div>
         </div>
         <div className="buttons flex justify-end">
                       <button className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-white ml-2 bg-indigo-500" type="submit">Post</button>
-                      <div className="p-1 px-4 font-semibold cursor-pointer bg-gray-500 ml-2" onClick={() => router.back()}>Cancel</div>
+                      <div className="p-1 px-4 font-semibold cursor-pointer bg-gray-500 ml-2 dark:text-slate-400" onClick={() => router.back()}>Cancel</div>
         </div>
     </form>
 </div>

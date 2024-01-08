@@ -26,13 +26,19 @@ interface Event {
   eventParticipants: number
 }
 
+interface Attendee {
+  id: number, 
+  email: string,
+  username: string,
+}
+
 const page = () => {
   const { id } = useParams();
   const router = useRouter();
   const style = { marginTop: '3px' };
   const [ event, setEvent] = useState<Event | undefined>();
   const [loading, setLoading] = useState(false);
-  const [attendees, setAttendees] = useState([]);
+  const [attendees, setAttendees] = useState<Attendee>([]);
   const token = sessionStorage.getItem("token") || "";
   const { user, error } = useUserFetch(token);
   const [disabled, setDisabled] = useState(false);
@@ -87,7 +93,7 @@ const page = () => {
   return (
     <>
       {event && (
-         <section className="flex flex-row px-2 mt-4 overflow-y-auto items-start font-pretendardRegular justify-around w-full pr-6 h-screen">
+         <section className="flex flex-row px-2 pt-4 overflow-y-auto items-start font-pretendardRegular justify-around w-full pr-6 h-screen dark:bg-slate-800">
          <div className="flex flex-col w-3/4 gap-4 px-4 mr-8">
          <ToastContainer
           position="top-center"
@@ -102,26 +108,26 @@ const page = () => {
           theme="colored"
           />
            <h3 
-             className="flex flex-row gap-2 uppercase text-md font-bold text-navy cursor-pointer hover:text-lightnavy"
+             className="flex flex-row gap-2 uppercase text-md font-bold text-navy cursor-pointer hover:text-lightnavy dark:text-slate-400"
              onClick={() => router.back()}>
                  <FaArrowLeft style={style} /> All Events
                </h3>
 
             <img className="object-cover w-full h-96 rounded-lg" src="https://i.ibb.co/BrXvpNb/developer.jpg" alt="event cover"/>
              
-             <h1 className="text-4xl font-bold">{event.eventName}</h1>
+             <h1 className="text-4xl font-bold dark:text-white">{event.eventName}</h1>
    
             <div className="flex flex-row gap-4 rounded-lg items-center">
               <FaLocationDot color="gray" />
-              <h1 className="text-lg font-normal">{event.eventLocationDetail}</h1>
+              <h1 className="text-lg font-normal dark:text-white">{event.eventLocationDetail}</h1>
             </div>
 
             <div className="flex flex-row mt-0 gap-4 rounded-lg items-center">
               <IoIosTime color="gray" />
-              <h1 className="text-lg font-normal">{event.eventDateTime}</h1>
+              <h1 className="text-lg font-normal dark:text-white">{event.eventDateTime}</h1>
             </div>
 
-            <p className="pr-10 text-slate-500">{event.eventDescription}</p>
+            <p className="pr-10 text-slate-500 dark:text-slate-300">{event.eventDescription}</p>
 
             <button className="join-button group relative h-12 w-48 overflow-hidden rounded bg-blue-500 text-lg font-bold text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
               onClick={joinEvent} disabled={disabled}>

@@ -246,16 +246,14 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
     <nav
       role="navigation"
       className={
-        `bg-slate-50 border-r border-slate-100 shadow-sm inset-y-0 left-0 transition-all duration-300 ease-in-out
+        `bg-slate-50 border-r border-slate-100 shadow-sm inset-y-0 left-0 transition-all duration-300 ease-in-out dark:border-gray-950 dark:bg-gray-950
         ${
           isExpand
-            ? "bg-slate-50 w-72"
+            ? "bg-slate-50 w-72 dark:bg-gray-950"
             : isExpandOnHover
             ? "bg-slate-50/70 w-72 backdrop-blur-md"
-            : "bg-slate-50 w-20"
-        }`}
-    >
-
+            : "bg-slate-50 w-20 dark:bg-gray-950"
+        } dark:bg-gray-950`}>
       <div className="w-full flex">
       <button
         className="z-50 ml-auto bg-slate-50 hover:bg-slate-100 text-slate-500 p-0.5"

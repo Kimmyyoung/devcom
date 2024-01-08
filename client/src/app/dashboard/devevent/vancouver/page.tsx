@@ -31,12 +31,12 @@ const Page: React.FC = () => {
   
   return (
     <>
-    <div className="p-6 flex w-100 flex-col gap-2 overflow-y-auto overflow-x-hidden">
+    <div className="p-6 flex w-100 h-full flex-col gap-2 overflow-y-auto overflow-x-hidden dark:bg-slate-800">
       <div className="mb-10">
-        <div className="text-3xl font-bold text-orange sm:text-4xl">Developer Event</div>
+        <div className="text-3xl font-bold text-orange sm:text-4xl dark:text-white">Developer Event</div>
         <div className="flex flex-row mt-2 items-center gap-2">
           <MdLocationOn color="gray"/>
-          <h1 className="flex-auto text-base text-slate-500">Vancouver, BC, CA</h1>
+          <h1 className="flex-auto text-base text-slate-500 dark:text-slate-300">Vancouver, BC, CA</h1>
         </div>
       </div>   
       

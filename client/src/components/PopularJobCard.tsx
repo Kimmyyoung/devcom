@@ -17,7 +17,7 @@ const PopularJobCard: React.FC<PopularJobCardProps> = ({data}) => {
 
   return (
     <Link href={`/dashboard/jobdetail/${job_id}`} replace>
-      <div className="rounded-lg w-60 h-50 bg-blue-950 text-white p-6 hover:bg-blue-900 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] cursor-pointer font-pretendardRegular">
+      <div className="rounded-lg w-60 h-50 bg-blue-950 text-white p-6 hover:bg-blue-900 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] cursor-pointer font-pretendardRegular dark:bg-slate-700">
         
     <div className="block mb-4 w-10 h-10 rounded overflow-hidden bg-white items-center align-center">
         <img
