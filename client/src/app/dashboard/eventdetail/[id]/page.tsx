@@ -11,6 +11,8 @@ import useUserFetch from '@/hook/useUserFetch';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ChatModal from '@/components/ChatModal';
+import socketIO from 'socket.io-client';
+const socket = socketIO.connect('http://localhost:8080');
 
 const eventsURL = "http://localhost:8080/events/";
 
@@ -39,7 +41,7 @@ const page = () => {
   const style = { marginTop: '3px' };
   const [ event, setEvent] = useState<Event | undefined>();
   const [loading, setLoading] = useState(false);
-  const [attendees, setAttendees] = useState<Attendee>([]);
+  const [attendees, setAttendees] = useState<Attendee[]>([]);
   const token = sessionStorage.getItem("token") || "";
   const { user, error } = useUserFetch(token);
   const [disabled, setDisabled] = useState(false);
@@ -147,7 +149,7 @@ const page = () => {
               <div className="absolute inset-0 h-full w-full scale-0 rounded transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
             </button>
           </div>
-          {isChatModalOpen && <ChatModal onClose={handleChatModalClose} />}
+          {isChatModalOpen && <ChatModal user={user?.username} socket={socket} onClose={handleChatModalClose} />}
 
    
            {/* card navigation */}

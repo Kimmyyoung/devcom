@@ -3,7 +3,6 @@ import React, { FC, useRef, useState, useEffect } from "react";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { sidebarStructure } from "../../src/data/SidebarMenu";
-import { Montserrat } from "next/font/google";
 import useUserFetch from "@/hook/useUserFetch";
 //icon
 import { MdDeveloperBoard } from "react-icons/md";
@@ -11,11 +10,6 @@ import { MdDashboard } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 
-const montserrat = Montserrat({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap"
-});
 
 interface SidebarProps {
   setExpand: (value: boolean) => void;
@@ -39,8 +33,6 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
   const [isExpandOnHover, setIsExpandOnHover] = useState<boolean>(false);
   const token = sessionStorage.getItem("token") || "";
   const { user, loading, error } = useUserFetch(token);
-
-  console.log(user, error);
 
   const handleHoverExpand = (value: boolean) => {
     if (!isExpand) {
@@ -165,7 +157,7 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
               )
             ) : null}
             <div
-              className={`truncate ${montserrat.className} ${
+              className={`truncate font-montserrat ${
                 isExpand ? "" : isExpandOnHover ? "" : "w-0 h-0 opacity-0"
               }`}
             >
