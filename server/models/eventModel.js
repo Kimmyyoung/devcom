@@ -33,7 +33,6 @@ const createAttendee = async (req, res) => {
     }
     const currentAttendees = event.eventAttendees || [];
     currentAttendees.push({ user_id, email, username });
-    console.log(currentAttendees);
     
     const updatedAttendees = JSON.stringify(currentAttendees);
     

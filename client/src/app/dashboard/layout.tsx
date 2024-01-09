@@ -11,10 +11,8 @@ import Topbar from '@/components/Topbar';
 
 export default function RootLayout({
   children,
-  token
 }: {
     children: React.ReactNode,
-    token : string
   }) {
 
   const [sideMenuIsExpand, setSideMenuIsExpand] = useState(true);
@@ -29,7 +27,7 @@ export default function RootLayout({
       </Head>
       <body>
         <div className="flex flex-row overflow-hidden">
-          <Sidebar setExpand={setSideMenuIsExpand} router={router} token={token} />  
+          <Sidebar setExpand={setSideMenuIsExpand} router={router} />  
           <main className="flex w-28 h-screen flex-1 flex-col">
           <Topbar />
           {children}

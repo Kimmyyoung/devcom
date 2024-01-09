@@ -29,6 +29,7 @@
     "react-toggle-dark-mode": "^1.1.1",
     "simplebar": "^6.2.5",
     "simplebar-react": "^3.2.4",
+    "socket.io-client": "^4.7.3",
     "typescript": "^5.3.3",
     "validator": "^13.11.0"
   },

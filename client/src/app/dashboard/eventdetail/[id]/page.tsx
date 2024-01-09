@@ -10,6 +10,7 @@ import MemberCard from '@/components/MemberCard';
 import useUserFetch from '@/hook/useUserFetch';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ChatModal from '@/components/ChatModal';
 
 const eventsURL = "http://localhost:8080/events/";
 
@@ -42,7 +43,8 @@ const page = () => {
   const token = sessionStorage.getItem("token") || "";
   const { user, error } = useUserFetch(token);
   const [disabled, setDisabled] = useState(false);
-  
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false);
+
   useEffect(() => {
     try {
       const fetchEvent = async () => {
@@ -56,7 +58,7 @@ const page = () => {
     } catch (err) {
       console.error(err);
     }
-  }, [attendees]);
+  }, []);
 
   if (!loading) return <Loading />;
   
@@ -89,6 +91,16 @@ const page = () => {
       console.error(err);
     }
   }
+
+  const handleChatButtonClick = () => {
+    setIsChatModalOpen(!isChatModalOpen);
+  };
+
+
+  const handleChatModalClose = () => {
+    setIsChatModalOpen(false);
+  }
+
 
   return (
     <>
@@ -134,31 +146,36 @@ const page = () => {
               {disabled ? "Joined" : "I would like to join!"}
               <div className="absolute inset-0 h-full w-full scale-0 rounded transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
             </button>
-         </div>
+          </div>
+          {isChatModalOpen && <ChatModal onClose={handleChatModalClose} />}
+
    
            {/* card navigation */}
-           <div className={`sticky top-0 flex flex-col font-montserrat items-center justify-center w-1/4 bg-slate-50 border-1 gap-4 rounded-lg`}>
+          <div className={`sticky top-0 flex flex-col font-montserrat items-center justify-center w-1/4 bg-slate-50 border-1 gap-4 rounded-lg dark:bg-slate-500`}>
            <div
-           className="block max-w-[18rem] rounded-lg text-slate-500">
+           className="block max-w-[18rem] rounded-lg text-slate-500 dark:text-white">
               <div className="p-6 flex flex-col gap-2">
                 <h5
                   className="mb-2 text-lg font-bold leading-tight uppercase text-center">
                   Event Participants
                 </h5>  
-                
                 <div className="flow-root">
                   <ul role="list" className="">
                     {attendees.map((eventAttendee) => (
-                      <MemberCard key={eventAttendee.id} props={eventAttendee} />  
+                      <MemberCard
+                        key={eventAttendee.id}
+                        props={eventAttendee}
+                        isChatModalOpen={isChatModalOpen}
+                        onChatButtonClick={handleChatButtonClick}
+                      />
                     ))}
                   </ul>
                 </div>
        </div>
      </div>
-     </div>
+          </div>
    </section>
       )}
-    
     </>
   )
 }

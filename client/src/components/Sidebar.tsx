@@ -1,18 +1,15 @@
 "use client"
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useRef, useState, useEffect } from "react";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { sidebarStructure } from "../../src/data/SidebarMenu";
 import { Montserrat } from "next/font/google";
-
+import useUserFetch from "@/hook/useUserFetch";
 //icon
 import { MdDeveloperBoard } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
-import { NextRouter, useRouter } from "next/router";
-import axios from "axios";
 
 const montserrat = Montserrat({
   weight: "400",
@@ -25,7 +22,7 @@ interface SidebarProps {
   router: any;
 }
 
-const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
+const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
   const profilePic =
     "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
   const link = "/";
@@ -38,34 +35,12 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
   }
   
   const listRef = useRef<Record<string, HTMLUListElement | null>>({});
-  const [isExpand, setIsExpand] = useState(true);
-  const [isExpandOnHover, setIsExpandOnHover] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [role, setRole] = useState("");
+  const [isExpand, setIsExpand] = useState<boolean>(true);
+  const [isExpandOnHover, setIsExpandOnHover] = useState<boolean>(false);
+  const token = sessionStorage.getItem("token") || "";
+  const { user, loading, error } = useUserFetch(token);
 
-  if (token === undefined || token === null || !token) {
-    token = sessionStorage.getItem("token") || "";
-  }
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get('http://localhost:8080/users/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        setUserName(res.data.username);
-        setRole(res.data.role);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    fetchUser();
-
-  }, [token]);
+  console.log(user, error);
 
   const handleHoverExpand = (value: boolean) => {
     if (!isExpand) {
@@ -77,7 +52,6 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
     setActiveName(path.name);
     router.push(path.link);
   };
-
 
   const handleToggle = (name: string) => {
     const rootEl = name.split(".")[0];
@@ -313,10 +287,10 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
                   <div
                     className={`text-base font-semibold text-slate-700 truncate duration-300`}
                   >
-                    {userName}
+                  {user?.username}
                   </div>
                   <div className={`text-sm text-slate-500 truncate`}>
-                    {role}
+                    {user?.role}
                   </div>
                 </div>
               </a>

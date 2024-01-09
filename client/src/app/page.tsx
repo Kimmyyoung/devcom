@@ -206,7 +206,7 @@ const Page = () => {
       ) : (
 					<>
 						<RootLayout token={token}>
-							<Home token={token} />
+							<Home />
 						</RootLayout>
 					</>
       )}

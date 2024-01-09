@@ -1,14 +1,18 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import { IoIosChatboxes } from "react-icons/io";
+import ChatModal from './ChatModal';
 
 interface MemberCardProps {
   props: {
     email: string,
     username: string
-  }
+  },
+  isChatModalOpen: boolean;
+  onChatButtonClick: () => void;
 }
 
-const MemberCard = ({ props } : MemberCardProps) => {
+const MemberCard = ({ props, isChatModalOpen, onChatButtonClick } : MemberCardProps) => {
   const profilePic =
     "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
   const { email, username } = props;
@@ -27,15 +31,15 @@ const MemberCard = ({ props } : MemberCardProps) => {
           </div>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-blue-500 truncate items-start">
+          <p className="text-sm font-medium text-blue-500 truncate items-start dark:text-white">
             {username}
           </p>
-          <p className="text-sm text-gray-500 truncate dark:text-gray-400 items-start">
+          <p className="text-sm text-gray-500 truncate dark:text-blue-200 items-start">
             {email}
           </p>
         </div>
         <div className="inline-flex items-center text-base font-semibold dark:text-white">
-          <button>
+        <button onClick={onChatButtonClick}>
             <IoIosChatboxes color="rgb(59 130 246)"/>
           </button>
         </div>
