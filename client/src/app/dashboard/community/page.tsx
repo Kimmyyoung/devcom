@@ -9,11 +9,28 @@ import Loading from '@/components/Loading';
 
 const postURL = "http://localhost:8080/posts";
 
+interface PostProps {
+  id: string;
+  title: string;
+  content: string;
+  description: string;
+  user_id: number;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+  }
+}
 const page = () => {
-  const [posts, setPosts] = useState([]);
-  const [author, setAuthor] = useState(); 
+  const [posts, setPosts] = useState<PostProps[]>([]);
   const [loading, setLoading] = useState(false);
-  const [userName, setUserName] = useState("");
   const router = useRouter();
 
   useEffect(() => {

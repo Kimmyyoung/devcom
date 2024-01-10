@@ -37,7 +37,6 @@ const page = () => {
 
   return (
       <div className="px-6 py-4 w-full font-pretendardRegular dark:bg-slate-800">
-      {/* Calendar Sidebar (Event) */}
       <div className="flex flex-row gap-4">
           <div className="flex flex-col gap-5 bg-navy text-white rounded-lg p-4 dark:bg-slate-600">
             <h3 className="text-orange text-xl uppercase">Events</h3>
@@ -70,7 +69,6 @@ const page = () => {
                   center: "title",
                   right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
                 }}
-                //calendar header (filter) : make sure no space
                 initialView="dayGridMonth"
                 editable={true}
                 selectable={true}

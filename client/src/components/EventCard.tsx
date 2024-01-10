@@ -23,7 +23,7 @@ const EventCard = ({ props } : EventCardProps) => {
 
     return (
       <Link href={`/dashboard/eventdetail/${id}`} replace>
-        <div className="flex flex-row px-3 w-full items-center justify-between cursor-pointer hover:bg-slate-100">
+        <div className="flex flex-col lg:flex-row md:flex-row w-1/2 lg:w-full md:w-full px-3 items-start lg:items-center md:items-center justify-between cursor-pointer hover:bg-slate-100">
             <div className="py-4 text-sm font-medium w-1/6">
               <h2 className="font-medium text-gray-800">
               {eventName}

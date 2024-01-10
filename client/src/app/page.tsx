@@ -9,15 +9,28 @@ import DarkMode from '@/components/DarkMode';
 const loginURL = 'http://localhost:8080/users/login';
 const signupURL = 'http://localhost:8080/users/signup';
 
+
+interface LoginFormData {
+	email: string;
+	password: string;
+}
+
 const Page = () => {
 	const [token, setToken] = useState(sessionStorage.getItem('token') || "");
-	const [showLogin, setShowLogin] = useState(true);
-	
-	const [isLoginError, setIsLoginError] = useState(false);
-	const [isSignupError, setIsSignupError] = useState(false);
-	const [errormessage, setErrorMessage] = useState("");
-	const [validError, setValidError] = useState("");
+  const [showLogin, setShowLogin] = useState<boolean>(true);
 
+  const [isLoginError, setIsLoginError] = useState<boolean>(false);
+  const [isSignupError, setIsSignupError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [validError, setValidError] = useState<string>("");
+
+	// if (typeof window !== "undefined") {
+  //   const storedToken = sessionStorage.getItem("token");
+  //   if (storedToken) {
+  //       setToken(storedToken)
+  //   }
+	// }
+	
 	// form validation
 	const checkEmail = (email : string) => {
 		validator.isEmail(email) ? setValidError("") : setValidError("Please enter valid email")
@@ -27,14 +40,13 @@ const Page = () => {
 		validator.isStrongPassword(password) ? setValidError("") : setValidError("Please enter over 8 characters password");
 	}
 
-
-	const handleLogin = async (e) => {
+	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		try {
 			const res = await axios.post(loginURL, {
-				email: e.target.email.value,
-				password: e.target.password.value
+				email: e.currentTarget.email.value,
+				password: e.currentTarget.password.value
 			});
 			
 
@@ -45,32 +57,34 @@ const Page = () => {
 		} catch (err) {
 			setIsLoginError(true);
 
-			if (err.response.status === 401) {
+			if ((err as any).response && (err as any).response.status === 401) {
 				setErrorMessage("Please check your email and password");
 			}
-			setErrorMessage("Please check your email and password");
 		}
 	};
 
-	const handleSignup = async (e) => {
+	const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+	
+		const usernameInput = e.currentTarget.elements.namedItem('username') as HTMLInputElement;
+		const emailInput = e.currentTarget.elements.namedItem('email') as HTMLInputElement;
+		const passwordInput = e.currentTarget.elements.namedItem('password') as HTMLInputElement;
+		const roleInput = e.currentTarget.elements.namedItem('role') as HTMLInputElement;
 	
 		try {
 			const res = await axios.post(signupURL, {
-				username: e.target.username.value,
-				email: e.target.email.value,
-				password: e.target.password.value,
-				role: e.target.role.value
+				username: usernameInput.value,
+				email: emailInput.value,
+				password: passwordInput.value,
+				role: roleInput.value
 			});
 			
 			setIsSignupError(false);
 			setErrorMessage(`Successfully created account ${res.config.data.username}}`);
-
+	
 		} catch (err) {
-			if (err.request.status === 401) {
-				setIsSignupError(true);
-				setErrorMessage("Already have account? Please login");
-			}
+			setIsSignupError(true);
+			setErrorMessage("Please check your email and password")
 		}
 	};
 
@@ -120,7 +134,7 @@ const Page = () => {
 							</div>
 
 							<div className="text-red-500 text-center dark:text-white">
-								{isLoginError && <p>{errormessage}</p>}
+								{isLoginError && <p>{errorMessage}</p>}
 							</div>	
 
 				</div>
@@ -178,7 +192,7 @@ const Page = () => {
 									</div>
 
 									<div className="text-red-500 text-center dark:text-slate-400">
-										{isSignupError && <p>{errormessage}</p>}
+										{isSignupError && <p>{errorMessage}</p>}
 									</div>
 
 									
@@ -205,7 +219,7 @@ const Page = () => {
         </>
       ) : (
 					<>
-						<RootLayout token={token}>
+						<RootLayout>
 							<Home />
 						</RootLayout>
 					</>

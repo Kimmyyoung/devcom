@@ -12,7 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ChatModal from '@/components/ChatModal';
 import socketIO from 'socket.io-client';
-const socket = socketIO.connect('http://localhost:8080');
+import { connect } from 'socket.io-client';
+const socket = connect('http://localhost:8080');
 
 const eventsURL = "http://localhost:8080/events/";
 
@@ -42,8 +43,8 @@ const page = () => {
   const [ event, setEvent] = useState<Event | undefined>();
   const [loading, setLoading] = useState(false);
   const [attendees, setAttendees] = useState<Attendee[]>([]);
-  const token = sessionStorage.getItem("token") || "";
-  const { user, error } = useUserFetch(token);
+  const { user } = useUserFetch();
+
   const [disabled, setDisabled] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
 
@@ -62,6 +63,7 @@ const page = () => {
     }
   }, []);
 
+  console.log(attendees);
   if (!loading) return <Loading />;
   
   const joinEvent = async () => {
@@ -75,7 +77,8 @@ const page = () => {
         user_id: user?.id,
         email: user?.email,
         username: user?.username
-      })
+      });
+
       setDisabled(true);
 
       toast.success('🦄 Successfully joined the event!', {
@@ -108,7 +111,8 @@ const page = () => {
     <>
       {event && (
          <section className="flex flex-row px-2 pt-4 overflow-y-auto items-start font-pretendardRegular justify-around w-full pr-6 h-screen dark:bg-slate-800">
-         <div className="flex flex-col w-3/4 gap-4 px-4 mr-8">
+         
+          <div className="flex flex-col w-3/4 gap-4 px-4 mr-8">
          <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -158,7 +162,7 @@ const page = () => {
            className="block max-w-[18rem] rounded-lg text-slate-500 dark:text-white">
               <div className="p-6 flex flex-col gap-2">
                 <h5
-                  className="mb-2 text-lg font-bold leading-tight uppercase text-center">
+                  className="mb-2 text-lg font-bold leading-tight uppercase text-center lg:text-lg md:text-sm sm:text-xs xs:text-xs">
                   Event Participants
                 </h5>  
                 <div className="flow-root">

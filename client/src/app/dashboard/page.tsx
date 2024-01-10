@@ -6,13 +6,24 @@ import JobCard from "@/components/JobCard";
 import Loading from '@/components/Loading';
 import useUserFetch from '@/hook/useUserFetch';
 
+interface JobItem {
+  id: string;
+  employer_logo: string;
+  job_id: string;
+  employer_name: string;
+  job_title: string;
+  job_country: string;
+  job_city: string;
+  job_apply_link: string;
+  job_salary_currency: string;
+}
+
 const Home = () => {
   const { data, loading, error } = useJobFetch('search', {
     query: 'software',
     num_pages: 1
   });
-  const token = sessionStorage.getItem('token') || "";
-  const { user } = useUserFetch(token);
+  const { user } = useUserFetch();
 
   if(loading) return <Loading />;
   if(error) return <div>Error!</div>;
@@ -26,7 +37,7 @@ const Home = () => {
       
       <h1 className="text-xl font-bold text-blue-950 xl:flex lg:flex md:hidden sm:hidden dark:text-white">Popular Jobs</h1>
       <div className="flex flex-row items-center w-full gap-5 mb-5 xl:flex lg:flex md:hidden sm:hidden">
-        {data?.slice(0, 4).map((item) => (
+        {data?.slice(0, 4).map((item : JobItem) => (
           <PopularJobCard key={item.id} data={item} />
         ))}
       </div>
@@ -34,7 +45,7 @@ const Home = () => {
       <h1 className="text-xl font-bold text-blue-950 dark:text-white">Job Lists</h1>
 
       <div className="flex flex-col gap-4">
-        {data?.map((item) => (
+        {data?.map((item: JobItem) => (
           <JobCard key={item.id} data={item} />
         ))}
       </div>

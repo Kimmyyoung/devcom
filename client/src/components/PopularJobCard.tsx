@@ -2,17 +2,22 @@ import React from 'react'
 import { MdOutlineWork } from "react-icons/md";
 import Link from 'next/link';
 
-interface JobItem {
+interface JobData {
   employer_logo: string;
+  job_id: string;
   employer_name: string;
   job_title: string;
   job_country: string;
+  job_city: string;
+  job_apply_link: string;
+  job_salary_currency: string;
 }
 
-interface PopularJobCardProps {
+interface JobBoardProps {
+  data: JobData;
 }
 
-const PopularJobCard: React.FC<PopularJobCardProps> = ({data}) => {
+const PopularJobCard: React.FC<JobBoardProps> = ({ data }) => {
   const { employer_logo, employer_name, job_title, job_city,job_country, job_id} = data;
 
   return (

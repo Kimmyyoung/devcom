@@ -1,9 +1,5 @@
 import React from 'react'
-
-// font
 import { Montserrat } from "next/font/google";
-
-//  react-icons
 import { MdWork } from "react-icons/md";
 import { IoLocation } from "react-icons/io5";
 import { MdAttachMoney } from "react-icons/md";
@@ -15,9 +11,28 @@ const montserrat = Montserrat({
   display: "swap"
 });
 
-const JobBoard = ({ data }) => {
+interface JobData {
+  employer_name: string;
+  job_title: string;
+  job_country: string;
+  job_city: string;
+  job_apply_link: string;
+  job_salary_currency: string;
+}
+
+interface JobBoardProps {
+  data: JobData | null | undefined;
+}
+
+const JobBoard: React.FC<JobBoardProps> = ({ data }) => {
   const styles = { marginLeft: '10px' };
-  let { employer_name, job_title, job_country, job_city, job_apply_link, job_salary_currency } = data ? data : { employer_name: '', job_title: '', job_city: '' ,job_country: '', job_apply_link: '', job_salary_currency: '' };
+  
+  if (!data) {
+    return <div>No data</div>;
+  }
+
+  let { employer_name, job_title, job_country, job_city, job_apply_link, job_salary_currency } = data;
+
 
   return (
     <div className={`${montserrat.className} sticky top-0 flex flex-col font-montserrat items-center justify-center w-1/4 bg-slate-200 border-1 gap-4 rounded-lg`}>

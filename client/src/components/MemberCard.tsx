@@ -21,7 +21,7 @@ const MemberCard = ({ props, isChatModalOpen, onChatButtonClick } : MemberCardPr
   return (
     <li className="py-3 px-3 sm:py-4 justify-start bg-blue-200/2 rounded">
       <div className="flex items-center space-x-4">
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 lg:block md:hidden sm:hidden xs:hidden">
           <div className="w-8 h-8 rounded-full">
             <img
               src={profilePic}
@@ -34,7 +34,7 @@ const MemberCard = ({ props, isChatModalOpen, onChatButtonClick } : MemberCardPr
           <p className="text-sm font-medium text-blue-500 truncate items-start dark:text-white">
             {username}
           </p>
-          <p className="text-sm text-gray-500 truncate dark:text-blue-200 items-start">
+          <p className="text-sm text-gray-500 truncate dark:text-blue-200 items-start md:text-xs">
             {email}
           </p>
         </div>

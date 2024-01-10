@@ -1,12 +1,12 @@
 import Link from "next/link";
 import useDarkMode from "@/hook/useDarkMode";
-// react-icons
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineWork } from "react-icons/md";
 import { IconContext } from "react-icons";
 
 interface JobCardProps {
   data: {
+    job_id: string;
     job_title: string;
     employer_name: string;
     employer_logo: string;
@@ -16,7 +16,7 @@ interface JobCardProps {
 
 const JobCard = ({ data }: JobCardProps) => {
   let { job_title, employer_name, employer_logo, job_country, job_id } = data;
-  const { isDarkMode } = useDarkMode();
+  const [colorTheme, setTheme, isDarkMode] = useDarkMode();
 
   return (
     <Link href={`/dashboard/jobdetail/${job_id}`} replace>

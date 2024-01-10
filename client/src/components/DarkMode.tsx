@@ -7,7 +7,7 @@ export default function DarkMode() {
     const [darkSide, setDarkSide] = useState(colorTheme === 'light' ? true : false);
 
     const toggleDarkMode = (checked: boolean | ((prevState: boolean) => boolean)) => {
-      setTheme(colorTheme);
+      setTheme(checked ? 'dark' : 'light');
       setDarkSide(checked);
     };
 

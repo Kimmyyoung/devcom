@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react'
+// import usePushNotification from '@/hook/usePushNotification';
 
 interface Message {
   id: string,
@@ -8,7 +9,7 @@ interface Message {
 }
 
 interface ChatModalProps {
-  user: string,
+  user?: string,
   socket: any,
   onClose: () => void
 }
@@ -17,22 +18,26 @@ const ChatModal = ({ user, socket, onClose }: ChatModalProps) => {
     "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
+  // const { fireNotification } = usePushNotification();
 
   const handleSendMessage = (e : React.FormEvent) => {
-    e.preventDefault();
-    if (message.trim() && user) {
-      socket.emit("message", {
-        text: message,
-        name: user,
-        id: `${socket.id}${Math.random()}`,
-        socketID: socket.id,
-      });
-      setMessage("");
-    }
-  }
+    e.preventDefault()
+        if(message.trim() && user) {
+            socket.emit("message", 
+                {
+                text: message, 
+                name: user, 
+                id: `${socket.id}${Math.random()}`
+              });
+        }
+        setMessage("")
+  };
 
+  
   useEffect(() => {
-    socket.on("messageResponse", (data : Message) => setMessages([...messages, data]))
+    socket.on('messageResponse', (data: any) => setMessages([...messages, data]));
+    // fireNotification('New Message', {});
+
   }, [socket, messages]);
 
   console.log(messages);
@@ -63,7 +68,7 @@ const ChatModal = ({ user, socket, onClose }: ChatModalProps) => {
         </div>
         ) : (
             <div className="flex flex-col items-end justify-end">
-             <p className="text-sm text-white uppercase mb-1">{message.name}</p>
+             <p className="text-sm text-black uppercase mb-1">{message.name}</p>
           <div className="bg-blue-500 p-3 rounded-lg">
                 <p className="text-sm text-white dark:text-black">{message.text}</p> 
           </div>

@@ -4,7 +4,7 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { sidebarStructure } from "../../src/data/SidebarMenu";
 import useUserFetch from "@/hook/useUserFetch";
-//icon
+
 import { MdDeveloperBoard } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
@@ -31,8 +31,7 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
   const listRef = useRef<Record<string, HTMLUListElement | null>>({});
   const [isExpand, setIsExpand] = useState<boolean>(true);
   const [isExpandOnHover, setIsExpandOnHover] = useState<boolean>(false);
-  const token = sessionStorage.getItem("token") || "";
-  const { user, loading, error } = useUserFetch(token);
+  const { user } = useUserFetch();
 
   const handleHoverExpand = (value: boolean) => {
     if (!isExpand) {
@@ -40,7 +39,7 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
     }
   };
   
-  const handleNavigate = (path: string) => {
+  const handleNavigate = (path: { name: string; link: string }) => {
     setActiveName(path.name);
     router.push(path.link);
   };
@@ -222,7 +221,7 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
         } dark:bg-gray-950`}>
       <div className="w-full flex">
       <button
-        className="z-50 ml-auto bg-slate-50 hover:bg-slate-100 text-slate-500 p-0.5"
+        className="ml-auto bg-slate-50 hover:bg-slate-100 text-slate-500 p-0.5"
         onClick={() => {
           setIsExpand(!isExpand);
           setExpand(!isExpand);

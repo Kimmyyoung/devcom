@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useJobFetch = (endpoint: any, query: any) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   
@@ -18,18 +18,20 @@ const useJobFetch = (endpoint: any, query: any) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
+    try {
+      const fetchData = async () => {
         const res = await axios.request(options);
         setData(res.data.data);
         setLoading(false);
-      } catch (err : any) {
-        setError(err);
-        setLoading(false);
       }
-    };
-    fetchData();
+      fetchData();
+    } catch (err: any) {
+      setError(err);
+      setLoading(false);
+    }
   }, []);
+
+
 
   return { data, loading, error };
 

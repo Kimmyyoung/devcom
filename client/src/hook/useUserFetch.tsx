@@ -5,19 +5,31 @@ interface UserType {
   id: number, 
   username: string,
   email: string,
+  role: string,
 }
 
 interface UserFetch {
-  user: UserType | null,
+  user?: UserType,
   loading: boolean,
-  error: Error | null
+  error?: Error
 }
 
-const useUserFetch = (token: any) : UserFetch => {
-  const [user, setUser] = useState<UserType | null>(null);
+const useUserFetch = () : UserFetch => {
+  const [user, setUser] = useState<UserType>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error>();
 
+	const [token, setToken] = useState(sessionStorage.getItem('token') || "");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = sessionStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    }
+  }, []);
+  
 
   const profileURL = "http://localhost:8080/users/profile";
 
