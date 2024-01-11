@@ -14,24 +14,24 @@ interface UserFetch {
   error?: Error
 }
 
+const profileURL = "http://localhost:8080/users/profile";
+
+
 const useUserFetch = () : UserFetch => {
   const [user, setUser] = useState<UserType>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error>();
+  const [token, setToken] = useState("");
 
-	const [token, setToken] = useState(sessionStorage.getItem('token') || "");
+	// const [token, setToken] = useState(sessionStorage.getItem('token') || "");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedToken = sessionStorage.getItem("token");
-      if (storedToken) {
-        setToken(storedToken);
-      }
+      const storedToken = sessionStorage.getItem('token') || "";
+      setToken(storedToken);
     }
   }, []);
-  
 
-  const profileURL = "http://localhost:8080/users/profile";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,8 +48,10 @@ const useUserFetch = () : UserFetch => {
         setLoading(false);
       }
     }
-
-    fetchData();
+  
+    if (typeof window !== "undefined") {
+      fetchData();
+    }
   }, [token]);
 
   return ({ user, loading, error})

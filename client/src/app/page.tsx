@@ -20,7 +20,15 @@ interface LoginFormData {
 }
 
 const Page = () => {
-	const [token, setToken] = useState(sessionStorage.getItem('token') || "");
+	const [token, setToken] = useState("");
+
+	useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = sessionStorage.getItem('token') || "";
+      setToken(storedToken);
+    }
+  }, []);
+	// const [token, setToken] = useState(sessionStorage.getItem('token') || "");
   const [showLogin, setShowLogin] = useState<boolean>(true);
 
   const [isLoginError, setIsLoginError] = useState<boolean>(false);
