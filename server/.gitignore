@@ -7,7 +7,6 @@
 /out
 /.next
 
-# Environment variables file
 .env
 
 # OS-specific files and directories
