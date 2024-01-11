@@ -63,16 +63,26 @@ const page = () => {
     }
   }, []);
 
-  console.log(attendees);
+  useEffect(() => {
+    try {
+      const fetchAttendee = async () => {
+        const res = await axios.get(eventsURL + id);
+        setAttendees(res.data[0].eventAttendees);
+        if (attendees.some((attendee) => attendee.id === user?.id)) setDisabled(true);
+      }
+      fetchAttendee();
+    } catch (err) {
+      console.error(err);
+    }
+  }, [attendees]);
+  
   if (!loading) return <Loading />;
   
   const joinEvent = async () => {
     try {
-      if (!user) {
-        router.push('/login');
-        return;
+      if(!user) {
+        console.log("Please login first");
       }
-
       const res = await axios.post(eventsURL + id + "/attendees", {
         user_id: user?.id,
         email: user?.email,
@@ -80,10 +90,12 @@ const page = () => {
       });
 
       setDisabled(true);
+      console.log(res.data);
+      // setAttendees([...attendees, res.data]);
 
       toast.success('🦄 Successfully joined the event!', {
         position: "top-center",
-        autoClose: 4000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

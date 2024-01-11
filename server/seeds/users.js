@@ -19,7 +19,7 @@ exports.seed = async function(knex) {
   ])
   await knex('posts').insert([
     {
-      id: 2,
+      id: 1,
       title: 'Exploring the Wonders of Artificial Intelligence',
       image: 'https://i.ibb.co/BrXvpNb/developer.jpg',
       content: `
