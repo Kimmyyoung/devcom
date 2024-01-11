@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: 'class',
   purge: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -37,7 +38,8 @@ module.exports = {
         purple: '#6D28D9',
         green: '#10B981',
         red: '#EF4444'
-      }
+      },
+      
     },
   },
   plugins: [],

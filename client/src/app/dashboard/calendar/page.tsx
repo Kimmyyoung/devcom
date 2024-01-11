@@ -36,17 +36,15 @@ const page = () => {
   }
 
   return (
-      <div className="px-6 py-4 w-full font-pretendardRegular">
-
-      {/* Calendar Sidebar (Event) */}
+      <div className="px-6 py-4 w-full font-pretendardRegular dark:bg-slate-800">
       <div className="flex flex-row gap-4">
-          <div className="flex flex-col gap-5 bg-navy text-white rounded-lg p-4">
+          <div className="flex flex-col gap-5 bg-navy text-white rounded-lg p-4 dark:bg-slate-600">
             <h3 className="text-orange text-xl uppercase">Events</h3>
             <ul>
             {currentEvents.map((e) => (
                 <li key={e.id} className="mb-4 rounded-md">
                   <p className="text-lg text-white">{e.title}</p>
-                  <p className="text-lightgray">
+                  <p className="text-lightgray dark:text-slate-400">
                     {e.start ? formatDate(e.start, {
                       year: "numeric",
                       month: "short",
@@ -57,10 +55,8 @@ const page = () => {
             ))}
             </ul>
           </div>
-
-        
         {/* Calendar */}
-        <div style={{ width: '100%', height: '800px' }}>
+        <div style={{ width: '100%', height: '800px' }} className="dark:text-white">
           <FullCalendar 
                 plugins={[
                   dayGridPlugin,
@@ -73,7 +69,6 @@ const page = () => {
                   center: "title",
                   right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
                 }}
-                //calendar header (filter) : make sure no space
                 initialView="dayGridMonth"
                 editable={true}
                 selectable={true}

@@ -2,22 +2,27 @@ import React from 'react'
 import { MdOutlineWork } from "react-icons/md";
 import Link from 'next/link';
 
-interface JobItem {
+interface JobData {
   employer_logo: string;
+  job_id: string;
   employer_name: string;
   job_title: string;
   job_country: string;
+  job_city: string;
+  job_apply_link: string;
+  job_salary_currency: string;
 }
 
-interface PopularJobCardProps {
+interface JobBoardProps {
+  data: JobData;
 }
 
-const PopularJobCard: React.FC<PopularJobCardProps> = ({data}) => {
+const PopularJobCard: React.FC<JobBoardProps> = ({ data }) => {
   const { employer_logo, employer_name, job_title, job_city,job_country, job_id} = data;
 
   return (
     <Link href={`/dashboard/jobdetail/${job_id}`} replace>
-      <div className="rounded-lg w-60 h-50 bg-blue-950 text-white p-6 hover:bg-blue-900 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] cursor-pointer font-pretendardRegular">
+      <div className="rounded-lg w-60 h-50 bg-blue-950 text-white p-6 hover:bg-blue-900 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] cursor-pointer font-pretendardRegular dark:bg-slate-700">
         
     <div className="block mb-4 w-10 h-10 rounded overflow-hidden bg-white items-center align-center">
         <img

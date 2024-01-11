@@ -4,62 +4,47 @@ import useJobFetch from '@/hook/useJobFetch';
 import PopularJobCard from "@/components/PopularJobCard";
 import JobCard from "@/components/JobCard";
 import Loading from '@/components/Loading';
-import axios from 'axios';
+import useUserFetch from '@/hook/useUserFetch';
 
-const Home = ({ token }) => {
-  const [userName, setUserName] = useState("");
+interface JobItem {
+  id: string;
+  employer_logo: string;
+  job_id: string;
+  employer_name: string;
+  job_title: string;
+  job_country: string;
+  job_city: string;
+  job_apply_link: string;
+  job_salary_currency: string;
+}
 
+const Home = () => {
   const { data, loading, error } = useJobFetch('search', {
     query: 'software',
     num_pages: 1
   });
-
-  if(token === undefined) {
-    token = sessionStorage.get('token');
-  }
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get('http://localhost:8080/users/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        setUserName(res.data.username);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    fetchUser();
-
-  }, []);
+  const { user } = useUserFetch();
 
   if(loading) return <Loading />;
-  if(error) return <div>Error!</div>;
- 
+  
   return (
-    <div className="w-full p-6 flex flex-col gap-2 overflow-y-auto font-pretendardRegular">
+    <div className="w-full p-6 flex flex-col gap-2 overflow-y-auto font-pretendardRegular dark:bg-slate-800">
       <div className="mb-10">
-        <div className="text-3xl font-bold text-orange sm:text-4xl">Welcome back <span className="text-blue-500">{userName}</span>!</div>
-        <h1 className="flex-auto pt-3 text-base text-slate-500">Check out your top matches and saved jobs down below!</h1>
+        <div className="text-3xl font-bold text-orange sm:text-4xl dark:text-white">Welcome back <span className="text-blue-500">{user?.username}</span>!</div>
+        <h1 className="flex-auto pt-3 text-base text-slate-500 dark:text-slate-100">Check out your top matches and saved jobs down below!</h1>
         </div>
       
-      <h1 className="text-xl font-bold text-blue-950 xl:flex lg:flex md:hidden sm:hidden">Popular Jobs</h1>
-      {/* job card  */}
+      <h1 className="text-xl font-bold text-blue-950 xl:flex lg:flex md:hidden sm:hidden dark:text-white">Popular Jobs</h1>
       <div className="flex flex-row items-center w-full gap-5 mb-5 xl:flex lg:flex md:hidden sm:hidden">
-        {data.slice(0, 4).map((item) => (
+        {data?.slice(0, 4).map((item : JobItem) => (
           <PopularJobCard key={item.id} data={item} />
         ))}
       </div>
       
-      {/* job lists  */}
-      <h1 className="text-xl font-bold text-blue-950">Job Lists</h1>
+      <h1 className="text-xl font-bold text-blue-950 dark:text-white">Job Lists</h1>
 
       <div className="flex flex-col gap-4">
-        {data.map((item) => (
+        {data?.slice(0,8).map((item: JobItem) => (
           <JobCard key={item.id} data={item} />
         ))}
       </div>

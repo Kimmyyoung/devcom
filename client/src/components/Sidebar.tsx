@@ -1,31 +1,22 @@
 "use client"
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useRef, useState, useEffect } from "react";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { sidebarStructure } from "../../src/data/SidebarMenu";
-import { Montserrat } from "next/font/google";
+import useUserFetch from "@/hook/useUserFetch";
 
-//icon
 import { MdDeveloperBoard } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
-import { NextRouter, useRouter } from "next/router";
-import axios from "axios";
 
-const montserrat = Montserrat({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap"
-});
 
 interface SidebarProps {
   setExpand: (value: boolean) => void;
   router: any;
 }
 
-const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
+const Sidebar: FC<SidebarProps> = ({ setExpand, router }) => {
   const profilePic =
     "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
   const link = "/";
@@ -38,34 +29,9 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
   }
   
   const listRef = useRef<Record<string, HTMLUListElement | null>>({});
-  const [isExpand, setIsExpand] = useState(true);
-  const [isExpandOnHover, setIsExpandOnHover] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [role, setRole] = useState("");
-
-  if (token === undefined || token === null || !token) {
-    token = sessionStorage.getItem("token") || "";
-  }
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get('http://localhost:8080/users/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        setUserName(res.data.username);
-        setRole(res.data.role);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    fetchUser();
-
-  }, [token]);
+  const [isExpand, setIsExpand] = useState<boolean>(true);
+  const [isExpandOnHover, setIsExpandOnHover] = useState<boolean>(false);
+  const { user } = useUserFetch();
 
   const handleHoverExpand = (value: boolean) => {
     if (!isExpand) {
@@ -73,11 +39,10 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
     }
   };
   
-  const handleNavigate = (path: string) => {
+  const handleNavigate = (path: { name: string; link: string }) => {
     setActiveName(path.name);
     router.push(path.link);
   };
-
 
   const handleToggle = (name: string) => {
     const rootEl = name.split(".")[0];
@@ -191,7 +156,7 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
               )
             ) : null}
             <div
-              className={`truncate ${montserrat.className} ${
+              className={`truncate font-montserrat ${
                 isExpand ? "" : isExpandOnHover ? "" : "w-0 h-0 opacity-0"
               }`}
             >
@@ -246,19 +211,17 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
     <nav
       role="navigation"
       className={
-        `bg-slate-50 border-r border-slate-100 shadow-sm inset-y-0 left-0 transition-all duration-300 ease-in-out
+        `bg-slate-50 border-r border-slate-100 shadow-sm inset-y-0 left-0 transition-all duration-300 ease-in-out dark:border-gray-950 dark:bg-gray-950
         ${
           isExpand
-            ? "bg-slate-50 w-72"
+            ? "bg-slate-50 w-72 dark:bg-gray-950"
             : isExpandOnHover
             ? "bg-slate-50/70 w-72 backdrop-blur-md"
-            : "bg-slate-50 w-20"
-        }`}
-    >
-
+            : "bg-slate-50 w-20 dark:bg-gray-950"
+        } dark:bg-gray-950`}>
       <div className="w-full flex">
       <button
-        className="z-50 ml-auto bg-slate-50 hover:bg-slate-100 text-slate-500 p-0.5"
+        className="ml-auto bg-slate-50 hover:bg-slate-100 text-slate-500 p-0.5"
         onClick={() => {
           setIsExpand(!isExpand);
           setExpand(!isExpand);
@@ -315,10 +278,10 @@ const Sidebar: FC<SidebarProps> = ({ setExpand, router, token }) => {
                   <div
                     className={`text-base font-semibold text-slate-700 truncate duration-300`}
                   >
-                    {userName}
+                  {user?.username}
                   </div>
                   <div className={`text-sm text-slate-500 truncate`}>
-                    {role}
+                    {user?.role}
                   </div>
                 </div>
               </a>

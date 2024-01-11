@@ -21,6 +21,19 @@ const getPostById = async (req, res) => {
   }
 }
 
+const getAuthorById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const author = await knex('posts')
+    .select('posts.*', 'users.username')
+    .where({ 'posts.id': id })
+    .join('users', { 'posts.user_id': 'users.id' });
+    return author;
+  } catch (err) {
+    throw new Error(`Error in getAuthorById: ${err.message}`);
+  }
+}
+
 const createPost = async (req, res) => {
   try {
     const { title, image, content, user_id } = req.body;
@@ -37,5 +50,6 @@ const createPost = async (req, res) => {
 module.exports = {  
   getPost,
   getPostById,
-  createPost
+  createPost,
+  getAuthorById
 };

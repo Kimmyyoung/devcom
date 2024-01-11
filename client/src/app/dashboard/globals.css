@@ -7,3 +7,19 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
+.fill-available {
+  width: -webkit-fill-available;
+}
+
+.join-button {
+  background-color: rgb(59 130 246);
+}
+
+.join-button:disabled {
+  background-color: gray;
+}
+
+.join-button:disabled:hover {
+  background-color: gray;
+}

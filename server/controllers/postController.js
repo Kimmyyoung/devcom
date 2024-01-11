@@ -20,6 +20,15 @@ const getPostByIdController = async (req,res) => {
   }
 }
 
+const getAuthorByIdController = async (req,res) => {
+  try{
+    const author = await postModel.getAuthorById(req);
+    res.status(200).json(author);
+  }catch(err) {
+    console.error('Error in getAuthorById:', err);
+  }
+}
+
 const createPostController = async (req,res) => {
   try {        
     const post = await postModel.createPost(req, res);
@@ -30,8 +39,10 @@ const createPostController = async (req,res) => {
 };
 
 
+
 module.exports = {
   getPostsController,
   getPostByIdController,
+  getAuthorByIdController,
   createPostController
 }
