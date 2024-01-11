@@ -13,12 +13,17 @@ const page = () => {
     const [content, setContent] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const router = useRouter();
-    const { user } = useUserFetch();
+    const { user, error } = useUserFetch();
     
 
     const createPost = async (e:{ preventDefault: () => void; }) => {
         e.preventDefault();
         
+        if (error) {
+            console.error('User not found');
+            return;
+        }
+
         try {
             const postData = {
                 title: title,
@@ -99,5 +104,6 @@ const page = () => {
 </>
   )
 }
+
 
 export default page

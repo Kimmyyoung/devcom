@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-type DarkModeHook = [string | undefined, React.Dispatch<React.SetStateAction<string | undefined>>];
+type DarkModeHook = [string | undefined, React.Dispatch<React.SetStateAction<string | undefined>>, boolean];
 
 const useDarkMode = (): DarkModeHook => {
   const [theme, setTheme] = useState<string | undefined>();
@@ -25,10 +25,10 @@ const useDarkMode = (): DarkModeHook => {
   }, [theme, colorTheme]);
 
   if (typeof window !== "undefined") {
-    return [theme, setTheme];
+    return [theme, setTheme, isDarkMode];
   }
 
-  return ["light", () => {}];
+  return ["light", () => {}, false];
 
 }
 

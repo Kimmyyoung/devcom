@@ -26,8 +26,7 @@ const Home = () => {
   const { user } = useUserFetch();
 
   if(loading) return <Loading />;
-  if(error) return <div>Error!</div>;
- 
+  
   return (
     <div className="w-full p-6 flex flex-col gap-2 overflow-y-auto font-pretendardRegular dark:bg-slate-800">
       <div className="mb-10">
@@ -45,7 +44,7 @@ const Home = () => {
       <h1 className="text-xl font-bold text-blue-950 dark:text-white">Job Lists</h1>
 
       <div className="flex flex-col gap-4">
-        {data?.map((item: JobItem) => (
+        {data?.slice(0,8).map((item: JobItem) => (
           <JobCard key={item.id} data={item} />
         ))}
       </div>

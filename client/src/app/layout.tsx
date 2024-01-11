@@ -1,15 +1,13 @@
 import Head from 'next/head'
 import './layout.css'
-import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  icons: {
-    icon: '/favicon.ico',
-  },
-  title: 'Devcom',
-  description: 'Developer Community',
-}
+import { Metadata } from 'next'
  
+export const metadata: Metadata = {
+  title: 'Devcom',
+  description: 'A social media platform for developers',
+}
+
 export default function RootLayout({
   children,
 }: {
