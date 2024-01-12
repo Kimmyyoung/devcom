@@ -68,14 +68,14 @@ const page = () => {
       const fetchAttendee = async () => {
         const res = await axios.get(eventsURL + id);
         setAttendees(res.data[0].eventAttendees);
-        if (attendees.some((attendee) => attendee.id === user?.id)) setDisabled(true);
+        // if (attendees.some((attendee) => attendee.id === user?.id)) setDisabled(true);
       }
       fetchAttendee();
     } catch (err) {
       console.error(err);
     }
   }, [attendees]);
-  
+
   if (!loading) return <Loading />;
   
   const joinEvent = async () => {
@@ -90,7 +90,6 @@ const page = () => {
       });
 
       setDisabled(true);
-      console.log(res.data);
       // setAttendees([...attendees, res.data]);
 
       toast.success('🦄 Successfully joined the event!', {

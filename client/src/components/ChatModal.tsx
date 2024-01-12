@@ -68,9 +68,9 @@ const ChatModal = ({ user, socket, onClose }: ChatModalProps) => {
         </div>
         ) : (
             <div className="flex flex-col items-end justify-end">
-             <p className="text-sm text-black uppercase mb-1">{message.name}</p>
+             <p className="text-sm text-black uppercase mb-1 dark:text-white">{message.name}</p>
           <div className="bg-blue-500 p-3 rounded-lg">
-                <p className="text-sm text-white dark:text-black">{message.text}</p> 
+                <p className="text-sm text-white dark:text-white">{message.text}</p> 
           </div>
         </div> 
         )

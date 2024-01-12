@@ -49,7 +49,7 @@ const Page = () => {
 	};
 
 	const checkPassword = (password : string) => {
-		validator.isStrongPassword(password) ? setValidError("") : setValidError("Please enter over 8 characters password");
+		validator.isStrongPassword(password) ? setValidError("") : setValidError("");
 	}
 
 	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
