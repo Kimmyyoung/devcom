@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "knex migrate:latest",
+    "postinstall": "npm run build",    
     "seed": "knex seed:run",
     "start": "node index.js",
     "dev": "nodemon index.js",
