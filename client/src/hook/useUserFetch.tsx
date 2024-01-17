@@ -14,7 +14,7 @@ interface UserFetch {
   error?: Error
 }
 
-const profileURL = "http://localhost:8080/users/profile";
+const profileURL = "https://devcom-0cbe786b171a.herokuapp.com/users/profile";
 
 
 const useUserFetch = () : UserFetch => {

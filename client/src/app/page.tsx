@@ -10,8 +10,8 @@ import devcom from '@/assets/devcom.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const loginURL = 'http://localhost:8080/users/login';
-const signupURL = 'http://localhost:8080/users/signup';
+const loginURL = 'https://devcom-0cbe786b171a.herokuapp.com/users/login';
+const signupURL = 'https://devcom-0cbe786b171a.herokuapp.com/users/signup';
 
 
 interface LoginFormData {

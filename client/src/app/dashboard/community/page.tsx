@@ -7,7 +7,7 @@ import { IoTimeOutline } from "react-icons/io5";
 import axios from 'axios';
 import Loading from '@/components/Loading';
 
-const postURL = "http://localhost:8080/posts";
+const postURL = "https://devcom-0cbe786b171a.herokuapp.com/posts";
 
 interface PostProps {
   id: string;

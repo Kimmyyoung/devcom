@@ -1,16 +1,9 @@
 
 "use client"
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-//component
 import JobBoard from '@/components/JobBoard';
-
-// hook
 import useJobFetch from '@/hook/useJobFetch';
-
-// icons 
 import { FaArrowLeft } from "react-icons/fa";
 import { useParams } from 'next/navigation';
 

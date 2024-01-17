@@ -15,7 +15,7 @@ import socketIO from 'socket.io-client';
 import { connect } from 'socket.io-client';
 const socket = connect('http://localhost:8080');
 
-const eventsURL = "http://localhost:8080/events/";
+const eventsURL = "https://devcom-0cbe786b171a.herokuapp.com/events/";
 
 interface Event {
   id: number
@@ -68,7 +68,6 @@ const page = () => {
       const fetchAttendee = async () => {
         const res = await axios.get(eventsURL + id);
         setAttendees(res.data[0].eventAttendees);
-        // if (attendees.some((attendee) => attendee.id === user?.id)) setDisabled(true);
       }
       fetchAttendee();
     } catch (err) {

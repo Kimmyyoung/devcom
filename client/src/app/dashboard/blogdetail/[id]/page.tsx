@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FaArrowLeft } from "react-icons/fa";
 import axios from 'axios';
 
-const postURL = "http://localhost:8080/posts";
+const postURL = "https://devcom-0cbe786b171a.herokuapp.com/posts";
 
 const BlogDetail = () => {
   const { id }  = useParams();

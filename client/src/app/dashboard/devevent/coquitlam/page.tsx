@@ -5,7 +5,7 @@ import EventCard from "@/components/EventCard";
 import axios from 'axios';
 import { MdLocationOn } from "react-icons/md";
 
-const eventsURL = "http://localhost:8080/events";
+const eventsURL = "https://devcom-0cbe786b171a.herokuapp.com/events";
 
 interface eventProps {
   id: number;

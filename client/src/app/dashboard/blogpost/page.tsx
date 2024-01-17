@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import useUserFetch from '@/hook/useUserFetch';
 
-const postURL = "http://localhost:8080/posts/create";
+const postURL = "https://devcom-0cbe786b171a.herokuapp.com/posts/create";
  
 const page = () => {
     const [title, setTitle] = useState("");
