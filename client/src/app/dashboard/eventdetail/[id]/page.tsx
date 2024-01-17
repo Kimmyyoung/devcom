@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ChatModal from '@/components/ChatModal';
 import socketIO from 'socket.io-client';
 import { connect } from 'socket.io-client';
-const socket = connect('http://localhost:8080');
+const socket = connect('https://devcom-0cbe786b171a.herokuapp.com/');
 
 const eventsURL = "https://devcom-0cbe786b171a.herokuapp.com/events/";
 

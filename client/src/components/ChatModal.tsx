@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-// import usePushNotification from '@/hook/usePushNotification';
 
 interface Message {
   id: string,
@@ -14,11 +13,8 @@ interface ChatModalProps {
   onClose: () => void
 }
 const ChatModal = ({ user, socket, onClose }: ChatModalProps) => {
-  const profilePic =
-    "https://img.mbiz.web.id/180x180/erp/R2p1IXoyVEpBMk01WOEAdaI3hHVlkuIg0wW5_pn-CJCKHSrA_n1-U1tfE7Bl5H4_4Z7AxgL0DPOmUCdPuCHHC5lWvMU5Ig3t1uDrkVN53MlWlnA";
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
-  // const { fireNotification } = usePushNotification();
 
   const handleSendMessage = (e : React.FormEvent) => {
     e.preventDefault()
@@ -36,11 +32,9 @@ const ChatModal = ({ user, socket, onClose }: ChatModalProps) => {
   
   useEffect(() => {
     socket.on('messageResponse', (data: any) => setMessages([...messages, data]));
-    // fireNotification('New Message', {});
 
   }, [socket, messages]);
 
-  console.log(messages);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
