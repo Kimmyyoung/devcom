@@ -2,6 +2,8 @@
 /node_modules
 /bower_components
 
+.next
+
 # Build and output directories
 /build
 /out

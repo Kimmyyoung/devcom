@@ -1,7 +1,15 @@
 {
+  "/_not-found": "app/_not-found.js",
   "/page": "app/page.js",
-  "/dashboard/eventdetail/[id]/page": "app/dashboard/eventdetail/[id]/page.js",
-  "/dashboard/community/page": "app/dashboard/community/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/dashboard/blogdetail/[id]/page": "app/dashboard/blogdetail/[id]/page.js",
   "/dashboard/blogpost/page": "app/dashboard/blogpost/page.js",
-  "/dashboard/calendar/page": "app/dashboard/calendar/page.js"
+  "/dashboard/calendar/page": "app/dashboard/calendar/page.js",
+  "/dashboard/community/page": "app/dashboard/community/page.js",
+  "/dashboard/devevent/burnaby/page": "app/dashboard/devevent/burnaby/page.js",
+  "/dashboard/devevent/coquitlam/page": "app/dashboard/devevent/coquitlam/page.js",
+  "/dashboard/devevent/vancouver/page": "app/dashboard/devevent/vancouver/page.js",
+  "/dashboard/eventdetail/[id]/page": "app/dashboard/eventdetail/[id]/page.js",
+  "/dashboard/jobdetail/[id]/page": "app/dashboard/jobdetail/[id]/page.js",
+  "/dashboard/page": "app/dashboard/page.js"
 }
