@@ -9,6 +9,7 @@
 /out
 /.next
 /.next/cache
+/.next/server
 
 # Environment variables file
 .env
