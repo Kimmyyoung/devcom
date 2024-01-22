@@ -9,7 +9,20 @@ const nextConfig = {
   eslint: {
     dirs: ['pages', 'utils'],
   },
-  assetPrefix: isProduction ? 'https://main--devcom-kim.netlify.app/' : '',
+  assetPrefix: isProduction ? 'https://devcom-kim.netlify.app/' : '',
+  reactStrictMode: true,
+  images: {
+    domains: ['devcom-kim.netlify.app'],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/app',
+        permanent: true,
+      },
+    ];
+  }
 }
 
 module.exports = nextConfig;
