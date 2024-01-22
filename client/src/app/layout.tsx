@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import './layout.css'
+// import "tailwindcss/tailwind.css";
 
 import { Metadata } from 'next'
  

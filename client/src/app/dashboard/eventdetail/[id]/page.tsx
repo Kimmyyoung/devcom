@@ -15,7 +15,7 @@ import socketIO from 'socket.io-client';
 import { connect } from 'socket.io-client';
 const socket = connect('https://devcom-0cbe786b171a.herokuapp.com/');
 
-const eventsURL = "https://devcom-0cbe786b171a.herokuapp.com//events/";
+const eventsURL = "https://devcom-0cbe786b171a.herokuapp.com/events/";
 
 interface Event {
   id: number

@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf dist",
-    "lintcache" : "next lint --cache"
+    "lintcache": "next lint --cache",
+    "build:styles": "npx postcss styles/globals.css -o .next/server/app/styles/globals.css"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
@@ -42,6 +43,7 @@
     "@types/socket.io-client": "^3.0.0",
     "@types/validator": "^13.11.7",
     "@vitejs/plugin-react": "^4.2.1",
+    "critters": "^0.0.20",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

@@ -5,6 +5,7 @@ import Head from 'next/head';
 import './globals.css'
 import Sidebar from '@/components/Sidebar';
 import Topbar from '@/components/Topbar';
+import "tailwindcss/tailwind.css";
 
 
 export default function RootLayout({

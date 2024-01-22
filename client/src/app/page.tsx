@@ -6,13 +6,13 @@ import Home from './dashboard/page';
 import validator from 'validator';
 import DarkMode from '@/components/DarkMode';
 import devcom from '@/assets/devcom.png';
+// import "tailwindcss/tailwind.css";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const loginURL = 'https://devcom-0cbe786b171a.herokuapp.com/users/login';
 const signupURL = 'https://devcom-0cbe786b171a.herokuapp.com/users/signup';
-
 
 interface LoginFormData {
 	email: string;
@@ -42,8 +42,7 @@ const Page = () => {
   //       setToken(storedToken)
   //   }
 	// }
-	
-	// form validation
+
 	const checkEmail = (email : string) => {
 		validator.isEmail(email) ? setValidError("") : setValidError("Please enter valid email")
 	};
@@ -120,7 +119,6 @@ const Page = () => {
 					<DarkMode />
 				<div className="max-w-md mx-auto">
 					<div className="flex flex-col gap-3 items-center">
-								{/* <h1 className="text-2xl text-white rounded px-3 bg-gradient-to-r from-blue-300 to-blue-600 font-semibold">DEVCOM</h1> */}
 								<img src="https://i.ibb.co/sjpHfs4/devcom.png" className="w-10 h-10" />
 								<h1 className="text-2xl font-semibold uppercase dark:text-white">Login</h1>
 							</div>

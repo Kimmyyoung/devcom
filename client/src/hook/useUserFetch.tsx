@@ -13,7 +13,7 @@ interface UserFetch {
   loading: boolean,
   error?: Error
 }
-//hello
+
 const profileURL = "https://devcom-0cbe786b171a.herokuapp.com/users/profile";
 
 
@@ -25,10 +25,16 @@ const useUserFetch = () : UserFetch => {
 
 	// const [token, setToken] = useState(sessionStorage.getItem('token') || "");
 
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const storedToken = sessionStorage.getItem('token') || "";
+  //     setToken(storedToken);
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = sessionStorage.getItem('token') || "";
-      setToken(storedToken);
+    if (window) {
+      setToken(sessionStorage.getItem('token') || "");
     }
   }, []);
 

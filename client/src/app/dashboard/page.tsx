@@ -5,6 +5,7 @@ import PopularJobCard from "@/components/PopularJobCard";
 import JobCard from "@/components/JobCard";
 import Loading from '@/components/Loading';
 import useUserFetch from '@/hook/useUserFetch';
+import "tailwindcss/tailwind.css";
 
 interface JobItem {
   id: string;
